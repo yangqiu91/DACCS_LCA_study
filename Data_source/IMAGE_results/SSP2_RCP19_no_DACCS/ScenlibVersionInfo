@@ -1,0 +1,20 @@
+This run was done using 
+Mon 06/21/2021 14:59:19.95 
+ 
+Using the following scenlibversion: 
+Path: .
+Working Copy Root Path: X:\user\daioglouv\Model-Environments\SSPs_IMAGE32\2_TIMER\scenlib\TIMER_3_2\SSPs_IMAGE32
+URL: https://pbl.sliksvn.com/timer_scenlib/TIMER_3_2/SSPs_IMAGE32/SSP2_SPA2_19I_D
+Relative URL: ^/TIMER_3_2/SSPs_IMAGE32/SSP2_SPA2_19I_D
+Repository Root: https://pbl.sliksvn.com/timer_scenlib
+Repository UUID: 39480758-7815-de43-8456-f6206d004f5d
+Revision: 4564
+Node Kind: directory
+Schedule: normal
+Last Changed Author: matthijsharmsen
+Last Changed Rev: 4497
+Last Changed Date: 2021-05-19 12:44:26 +0200 (Wed, 19 May 2021)
+
+ 
+Below follows a list of files that were unversioned(?) or carried local modifications(M) when running. 
+?       ScenlibVersionInfo
