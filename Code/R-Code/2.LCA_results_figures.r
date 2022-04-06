@@ -27,6 +27,7 @@ library(patternplot)
 library(png)
 library(ggplotify)
 library(ggbreak)
+library(tibble)
 
 
 ## Data Import
@@ -59,12 +60,12 @@ DAC_data_RCP19_DAC_LR_high$scenario = 'RCP19_DAC_LR_high'
 
 ## DACCS LCA contribution analysis result
 # SSP2_RCP1.9_with_DACCS scenario (no learning)
-LCA_con_sol_RCP19_data <- read_excel("C:/Users/YQIU/Box/DAC LCA-IAM/YQ_work/result/LCA_result/LCA_sol_RCP19_contribution_all_summary_table.xlsx")
-LCA_con_sor_RCP19_data <- read_excel("C:/Users/YQIU/Box/DAC LCA-IAM/YQ_work/result/LCA_result/LCA_sor_RCP19_contribution_all_summary_table.xlsx")
+LCA_con_sol_RCP19_data <- read_excel("C:/Users/YQIU/Box/DAC LCA-IAM/YQ_work/result/LCA_result/LCA_sol_RCP19_DAC_contribution_all_summary_table.xlsx")
+LCA_con_sor_RCP19_data <- read_excel("C:/Users/YQIU/Box/DAC LCA-IAM/YQ_work/result/LCA_result/LCA_sor_RCP19_DAC_contribution_all_summary_table.xlsx")
 
 # SSP2_RCP1.9_with_DACCS scenario (with learning based on reference learning rate)
-LCA_con_sol_RCP19_LR_data <- read_excel("C:/Users/YQIU/Box/DAC LCA-IAM/YQ_work/result/LCA_result/LCA_sol_RCP19_DAC_contribution_all_summary_table.xlsx")
-LCA_con_sor_RCP19_LR_data <- read_excel("C:/Users/YQIU/Box/DAC LCA-IAM/YQ_work/result/LCA_result/LCA_sor_RCP19_DAC_contribution_all_summary_table.xlsx")
+LCA_con_sol_RCP19_LR_data <- read_excel("C:/Users/YQIU/Box/DAC LCA-IAM/YQ_work/result/LCA_result/LCA_sol_RCP19_DAC_LR_contribution_all_summary_table.xlsx")
+LCA_con_sor_RCP19_LR_data <- read_excel("C:/Users/YQIU/Box/DAC LCA-IAM/YQ_work/result/LCA_result/LCA_sor_RCP19_DAC_LR_contribution_all_summary_table.xlsx")
 
 LCA_con_sol_RCP19_data$scenario = 'SSP2_RCP19_DAC'
 LCA_con_sol_RCP19_LR_data$scenario = 'SSP2_RCP19_DAC_L'
@@ -80,6 +81,8 @@ Kwh_elec_impact_US <- read_excel("C:/Users/YQIU/Box/DAC LCA-IAM/YQ_work/result/E
 # SSP2-Baseline scenario
 Elec_impact_US_baseline <- read_excel("C:/Users/YQIU/Box/DAC LCA-IAM/YQ_work/result/Electricity_environmental_impact/US_hv_Baseline.xlsx")
 
+#unique(Elec_impact_US_baseline$tech)
+
 # SSP2-RCP1.9 w/o DACCS scenario
 Elec_impact_US_RCP19_noDAC <- read_excel("C:/Users/yqiu/Box/DAC LCA-IAM/YQ_work/result/Electricity_environmental_impact/US_hv_RCP19_noDAC.xlsx")
 
@@ -87,7 +90,9 @@ Elec_impact_US_RCP19_noDAC <- read_excel("C:/Users/yqiu/Box/DAC LCA-IAM/YQ_work/
 Elec_impact_US_RCP19 <- read_excel("C:/Users/YQIU/Box/DAC LCA-IAM/YQ_work/result/Electricity_environmental_impact/US_hv_RCP19.xlsx")
 
 ###############################################
-
+unique(Elec_impact_US_baseline$tech)
+unique(Elec_impact_US_RCP19_noDAC$tech)
+unique(Elec_impact_US_RCP19$tech)
 
 
 
@@ -125,7 +130,7 @@ category_list = c('Climate change (kg CO2-Eq)',
                   'Urban land occupation (square meter-year)')
 
 
-gentech_sort = c('electricity production, hard coal',
+elec_cate_sort = c('electricity production, hard coal',
                  'electricity production, lignite',
                  'Electricity, at power plant/hard coal, IGCC, no CCS/2025',
                  'Electricity, at power plant/lignite, IGCC, no CCS/2025',
@@ -163,10 +168,51 @@ gentech_sort = c('electricity production, hard coal',
                  'electricity production, biomass with CCS',
                  'electricity production, wave',
                  'electricity production, deep geothermal',
-                 "market for electricity, high voltage",                                                          
+                 #"market for electricity, high voltage",                                                          
                  "market for transmission network, electricity, high voltage",                                    
                  "market for transmission network, long-distance")
 
+gen_tech = c('electricity production, hard coal',
+                   'electricity production, lignite',
+                   'Electricity, at power plant/hard coal, IGCC, no CCS/2025',
+                   'Electricity, at power plant/lignite, IGCC, no CCS/2025',
+                   'heat and power co-generation, hard coal',
+                   "heat and power co-generation, lignite",
+                   'electricity production, hard coal with CCS',
+                   'electricity production, lignite with CCS',
+                   'electricity production, natural gas, combined cycle power plant',
+                   'electricity production, natural gas, conventional power plant',
+                   'heat and power co-generation, natural gas, conventional power plant, 100MW electrical',
+                   'heat and power co-generation, natural gas, combined cycle power plant, 400MW electrical',
+                   'electricity production, natural gas with CCS',
+                   'electricity production, oil',
+                   'heat and power co-generation, oil',
+                   'electricity production, nuclear, boiling water reactor',
+                   'electricity production, nuclear, pressure water reactor',
+                   'electricity production, nuclear, pressure water reactor, heavy water moderated',
+                   'electricity production, hydro, run-of-river',
+                   "electricity production, hydro, reservoir, alpine region", 
+                   'electricity production, hydro, reservoir, non-alpine region',
+                   'electricity production, wind, 1-3MW turbine, onshore',
+                   'electricity production, wind, <1MW turbine, onshore',
+                   'electricity production, wind, >3MW turbine, onshore',
+                   'electricity production, wind, 1-3MW turbine, offshore',
+                   'electricity production, solar thermal parabolic trough, 50 MW',
+                   'electricity production, solar tower power plant, 20 MW',
+                   'electricity production, photovoltaic, 3kWp slanted-roof installation, multi-Si, panel, mounted',
+                   'electricity production, photovoltaic, 570kWp open ground installation, multi-Si',
+                   'electricity production, wood, future',
+                   "Electricity, at BIGCC power plant 450MW, no CCS/2025",
+                   'Electricity, at BIGCC power plant 450MW, pre, pipeline 200km, storage 1000m/2025, US',
+                   'heat and power co-generation, biogas, gas engine',
+                   'heat and power co-generation, wood chips, 6667 kW',
+                   'heat and power co-generation, wood chips, 6667 kW, state-of-the-art 2014',
+                   'electricity production, biomass with CCS',
+                   'electricity production, wave',
+                   'electricity production, deep geothermal')
+
+transmission <- c("market for transmission network, electricity, high voltage",                                    
+                  "market for transmission network, long-distance")
 
 
 eco_color_scheme = c('electricity production, hard coal' = 'black',
@@ -219,7 +265,7 @@ eco_color_scheme = c('electricity production, hard coal' = 'black',
                      'electricity production, wave' = 'red',
                      'electricity production, deep geothermal' = 'red',
                      
-                     "market for electricity, high voltage" = rgb(25/256, 58/256, 113/256),                                                          
+                     #"market for electricity, high voltage" = rgb(25/256, 58/256, 113/256),                                                          
                      "market for transmission network, electricity, high voltage" = rgb(25/256, 58/256, 113/256),                                    
                      "market for transmission network, long-distance" = rgb(25/256, 58/256, 113/256))
 
@@ -323,8 +369,10 @@ for (i in 1:nrow(Side_bar_data_overall)) {
   
 }
 
+
 Side_bar_data_overall_1 <- Side_bar_data_overall
 
+# to make the y axis break for the side bar plot
 for (i in 1:nrow(Side_bar_data_overall_1)) {
   if (Side_bar_data_overall_1[i, 1] == "Climate change (kg CO2-Eq)" &
       Side_bar_data_overall_1[i, 2] == 'Sorbent_HP' &
@@ -396,12 +444,12 @@ Impact_figure_function <- function(region_abb, impact_name, m_lowerbound, m_uppe
   
   
   side_figure <- ggplot() +
-    geom_bar(data = side_figure_data %>% filter(scenario == 'RCP19_DAC'),
+    geom_bar(data = side_figure_data %>% filter(scenario == 'SSP2_RCP19_DAC'),
              aes(x = tech_heat_num - 0.2, y = impact_change, color = tech_heat), fill = 'white', stat = "identity", width = 0.32, size = 1) + 
-    geom_bar(data = side_figure_data %>% filter(scenario == 'RCP19_DAC_LR'),
+    geom_bar(data = side_figure_data %>% filter(scenario == 'SSP2_RCP19_DAC_L'),
              aes(x = tech_heat_num + 0.2, y = impact_change, color = tech_heat, fill = tech_heat), stat = "identity", width = 0.32, size = 0.5) + 
     
-    geom_errorbar(data = side_figure_data %>% filter(scenario == 'RCP19_DAC_LR'),
+    geom_errorbar(data = side_figure_data %>% filter(scenario == 'SSP2_RCP19_DAC_L'),
                   aes(x = tech_heat_num + 0.2, ymin=lower_error, ymax=upper_error), width=.3,position=position_dodge(0.8)) +
     geom_hline(yintercept = 0, linetype = "dashed", color = "black", size = 0.7) +
     theme(axis.title.x = element_blank(),
@@ -598,6 +646,7 @@ writeWorksheetToFile("C:/Users/yqiu/Box/DAC LCA-IAM/YQ_work/result/LCA_result/Fi
 writeWorksheetToFile("C:/Users/yqiu/Box/DAC LCA-IAM/YQ_work/result/LCA_result/Figure_3_data.xlsx", 
                      data = Kwh_elec_impact_US_DAC_per_change_2020, sheet = "Figure_3b_line")
 
+
 ###############################################
 ## End of Figure 3b
 
@@ -628,28 +677,30 @@ Impact_category_factor <- c("Climate change (kg CO2-Eq)",
                             "Metal depletion (kg Fe-Eq)",   
                             "Water depletion (m3 water)")
 
-DAC_data_RCP19_DAC_LR$`Impact category` <- factor(DAC_data_RCP19_DAC_LR$`Impact category`, levels = Impact_category_factor)
+DAC_data_world_region <- DAC_data_RCP19_DAC_LR
+
+DAC_data_world_region$`Impact category` <- factor(DAC_data_world_region$`Impact category`, levels = Impact_category_factor)
 
 
 ## We don't include the captured 1t CO2 in this specific results for climate change impact, we we add the captured 1t CO2 back to the climate change impact
 
-for (i in 1:nrow(DAC_data_RCP19_DAC_LR)) {
-  if (DAC_data_RCP19_DAC_LR[i, 1] == 'Climate change (kg CO2-Eq)') {
-    DAC_data_RCP19_DAC_LR[i, 3:11] = DAC_data_RCP19_DAC_LR[i, 3:11] + 1000
+for (i in 1:nrow(DAC_data_world_region)) {
+  if (DAC_data_world_region[i, 1] == 'Climate change (kg CO2-Eq)') {
+    DAC_data_world_region[i, 3:11] = DAC_data_world_region[i, 3:11] + 1000
   } else {
-    DAC_data_RCP19_DAC_LR[i, 3:11] = DAC_data_RCP19_DAC_LR[i, 3:11] + 0
+    DAC_data_world_region[i, 3:11] = DAC_data_world_region[i, 3:11] + 0
   }
 }
 
 
 
-GL_2020_data <- DAC_data_RCP19_DAC_LR %>% 
+GL_2020_data <- DAC_data_world_region %>% 
   mutate(tech = substr(Heat_elec_region, 0, 10),
          region = substr(Heat_elec_region, 12, 13)) %>%
   select(`Impact category`, tech, region, `2020`) %>%
   filter(region == 'GL') 
 
-All_data <- DAC_data_RCP19_DAC_LR %>% 
+All_data <- DAC_data_world_region %>% 
   mutate(tech = substr(Heat_elec_region, 0, 10),
          region = substr(Heat_elec_region, 12, 13)) %>%
   select(`Impact category`, tech, region, `2020`, `2060`, `2100`) 
@@ -811,13 +862,13 @@ Contribution_figure_fun
 
 ## US
 US_cli_chan_con_figure <- Contribution_figure_fun (impact_name = "Climate change (kg CO2-Eq)", lower_l = -1400, upper_l = 700, lower_b = -1400, upper_b = 700)
-US_fre_eutr_con_figure <- Contribution_figure_fun (impact_name = "Freshwater eutrophication (kg P-Eq)", lower_l = -0.01, upper_l = 0.61, lower_b = 0, upper_b = 0.6)
-US_fre_ecot_con_figure <- Contribution_figure_fun (impact_name = "Freshwater ecotoxicity (kg 14-DCB)", lower_l = -0.8, upper_l = 20, lower_b = 0, upper_b = 20)
-US_ter_acid_con_figure <- Contribution_figure_fun (impact_name = "Terrestrial acidification (kg SO2-Eq)", lower_l = -0.01, upper_l = 2, lower_b = 0, upper_b = 2)
-US_ter_ecot_con_figure <- Contribution_figure_fun (impact_name = "Terrestrial ecotoxicity (kg 14-DCB)", lower_l = -0.01, upper_l = 0.08, lower_b = 0, upper_b = 0.08)
-US_hum_toxi_con_figure <- Contribution_figure_fun (impact_name = "Human toxicity (kg 14-DCB)", lower_l = -1, upper_l = 440, lower_b = 0, upper_b = 440)
-US_met_depl_con_figure <- Contribution_figure_fun (impact_name = "Metal depletion (kg Fe-Eq)", lower_l = -0.5, upper_l = 40, lower_b = 0, upper_b = 40)
-US_wat_delp_con_figure <- Contribution_figure_fun (impact_name = "Water depletion (m3 water)", lower_l = -0.1, upper_l = 12, lower_b = 0, upper_b = 12)
+US_fre_eutr_con_figure <- Contribution_figure_fun (impact_name = "Freshwater eutrophication (kg P-Eq)", lower_l = -0.001, upper_l = 0.61, lower_b = 0, upper_b = 0.6)
+US_fre_ecot_con_figure <- Contribution_figure_fun (impact_name = "Freshwater ecotoxicity (kg 14-DCB)", lower_l = -0.001, upper_l = 24, lower_b = 0, upper_b = 24)
+US_ter_acid_con_figure <- Contribution_figure_fun (impact_name = "Terrestrial acidification (kg SO2-Eq)", lower_l = -0.001, upper_l = 2, lower_b = 0, upper_b = 2)
+US_ter_ecot_con_figure <- Contribution_figure_fun (impact_name = "Terrestrial ecotoxicity (kg 14-DCB)", lower_l = -0.001, upper_l = 0.08, lower_b = 0, upper_b = 0.08)
+US_hum_toxi_con_figure <- Contribution_figure_fun (impact_name = "Human toxicity (kg 14-DCB)", lower_l = -0.001, upper_l = 440, lower_b = 0, upper_b = 440)
+US_met_depl_con_figure <- Contribution_figure_fun (impact_name = "Metal depletion (kg Fe-Eq)", lower_l = -0.001, upper_l = 40, lower_b = 0, upper_b = 40)
+US_wat_delp_con_figure <- Contribution_figure_fun (impact_name = "Water depletion (m3 water)", lower_l = -0.001, upper_l = 12, lower_b = 0, upper_b = 12)
 
 
 plot_grid(US_cli_chan_con_figure, US_hum_toxi_con_figure, 
@@ -888,23 +939,93 @@ writeWorksheetToFile("C:/Users/yqiu/Box/DAC LCA-IAM/YQ_work/result/LCA_result/SI
 ###############################################
 
 ## Data wrangling
-Elec_impact_US_baseline$tech <- factor(Elec_impact_US_baseline$tech, level = gentech_sort)
-Elec_impact_US_baseline$impact_category <- factor(Elec_impact_US_baseline$impact_category, level = category_list)
-Elec_impact_US_baseline$year <- as.numeric(Elec_impact_US_baseline$year)
 
-Elec_impact_US_RCP19$tech <- factor(Elec_impact_US_RCP19$tech, level = gentech_sort)
-Elec_impact_US_RCP19$impact_category <- factor(Elec_impact_US_RCP19$impact_category, level = category_list)
-Elec_impact_US_RCP19$year <- as.numeric(Elec_impact_US_RCP19$year)
 
-Elec_impact_US_RCP19_noDAC$tech <- factor(Elec_impact_US_RCP19_noDAC$tech, level = gentech_sort)
-Elec_impact_US_RCP19_noDAC$impact_category <- factor(Elec_impact_US_RCP19_noDAC$impact_category, level = category_list)
-Elec_impact_US_RCP19_noDAC$year <- as.numeric(Elec_impact_US_RCP19_noDAC$year)
+Elec_impact_US_RCP19_noDAC_agg <- aggregate(Elec_impact_US_RCP19_noDAC$value, 
+                                            by = list(Elec_impact_US_RCP19_noDAC$year, Elec_impact_US_RCP19_noDAC$impact_category, Elec_impact_US_RCP19_noDAC$tech), 
+                                            FUN = sum) %>% set_colnames(c('year', 'impact_category', 'tech', 'value'))
+  
+Elec_impact_US_RCP19_agg <- aggregate(Elec_impact_US_RCP19$value, 
+                                            by = list(Elec_impact_US_RCP19$year, Elec_impact_US_RCP19$impact_category, Elec_impact_US_RCP19$tech), 
+                                            FUN = sum) %>% set_colnames(c('year', 'impact_category', 'tech', 'value'))
+
+
+elect_impact_fun <- function(data) {
+  
+  #data = Elec_impact_US_RCP19_agg
+  #data = Elec_impact_US_baseline
+  #data = Elec_impact_US_RCP19_noDAC
+  #unique(data$tech)
+  
+  Elec_impact_US_gen_tech <- data %>% filter(tech %in% gen_tech) 
+  Elec_impact_US_high_v <- data %>% filter(tech  == 'market for electricity, high voltage') %>% select(year, impact_category, value)
+  Elec_impact_US_trans <- data %>% filter(tech  %in% transmission)
+  
+  
+  Elec_impact_US_gen_tech_total <- Elec_impact_US_gen_tech %>% 
+    group_by(year, impact_category) %>% 
+    summarise(total_all_tech = sum(value))
+  
+  
+  Elec_impact_US_hv_allocation <- Elec_impact_US_gen_tech %>% 
+    merge(Elec_impact_US_gen_tech_total, by = c('year', 'impact_category')) %>%
+    mutate(fraction = value/total_all_tech) %>%
+    select(year, impact_category, tech, fraction) %>% 
+    merge(Elec_impact_US_high_v, by = c('year', 'impact_category')) %>%
+    mutate(allocated_hv_value = fraction * value) %>%
+    select(year, impact_category, tech, allocated_hv_value)
+  
+  
+  Elec_impact_US_final <- Elec_impact_US_gen_tech %>%  
+    merge(Elec_impact_US_hv_allocation, by = c('year', 'impact_category', 'tech')) %>%
+    mutate(total_value = value + allocated_hv_value) %>%
+    select(year, impact_category, tech, total_value) %>% 
+    set_colnames(c("year", "impact_category", "tech", "value")) %>%
+    rbind(Elec_impact_US_trans)
+  
+ 
+  Elec_impact_US_final$tech <- factor(Elec_impact_US_final$tech, level = elec_cate_sort)
+  Elec_impact_US_final$impact_category <- factor(Elec_impact_US_final$impact_category, level = category_list)
+  Elec_impact_US_final$year <- as.numeric(Elec_impact_US_final$year)
+  
+  Elec_impact_US_final
+}
+
+
+Elec_impact_US_baseline_final <- elect_impact_fun(Elec_impact_US_baseline)
+
+Elec_impact_US_RCP19_final <- elect_impact_fun(Elec_impact_US_RCP19_agg)
+
+Elec_impact_US_RCP19_noDAC_final <- elect_impact_fun(Elec_impact_US_RCP19_noDAC_agg)
+
+
+
+Elec_impact_US_baseline_final$tech <- factor(Elec_impact_US_baseline_final$tech, level = elec_cate_sort)
+Elec_impact_US_baseline_final$impact_category <- factor(Elec_impact_US_baseline_final$impact_category, level = category_list)
+Elec_impact_US_baseline_final$year <- as.numeric(Elec_impact_US_baseline_final$year)
+
+
+Elec_impact_US_RCP19_final$tech <- factor(Elec_impact_US_RCP19_final$tech, level = elec_cate_sort)
+Elec_impact_US_RCP19_final$impact_category <- factor(Elec_impact_US_RCP19_final$impact_category, level = category_list)
+Elec_impact_US_RCP19_final$year <- as.numeric(Elec_impact_US_RCP19_final$year)
+
+Elec_impact_US_RCP19_noDAC_final$tech <- factor(Elec_impact_US_RCP19_noDAC_final$tech, level = elec_cate_sort)
+Elec_impact_US_RCP19_noDAC_final$impact_category <- factor(Elec_impact_US_RCP19_noDAC_final$impact_category, level = category_list)
+Elec_impact_US_RCP19_noDAC_final$year <- as.numeric(Elec_impact_US_RCP19_noDAC_final$year)
 
 
 ## Figure function
 Elec_impact_figure_fun = function(data_name, category, upperbound, lowerbound, up_limit, low_limit) {
-  ggplot() +
-    geom_area(data = data_name %>% filter(impact_category == category) %>% filter(tech %in% gentech_sort),
+  
+  #data_name = Elec_impact_US_baseline_final
+  #category = 'Climate change (kg CO2-Eq)'
+  #upperbound = 0.6
+  #lowerbound = -0.05
+  #up_limit = 0.6
+  #low_limit = 0
+  
+  Elec_impact_figure <- ggplot() +
+    geom_area(data = data_name %>% filter(impact_category == category) %>% filter(tech %in% elec_cate_sort),
               aes(x = year, y = value, fill = tech)) +
     theme(axis.title.x = element_blank(),
           axis.title.y = element_blank(),
@@ -925,40 +1046,44 @@ Elec_impact_figure_fun = function(data_name, category, upperbound, lowerbound, u
           panel.background = element_blank(),
           panel.spacing.x = unit(1, 'cm')) +
     scale_y_continuous(limits = c(lowerbound, upperbound), breaks = c(seq(low_limit, up_limit, (up_limit - low_limit)/4)), name = "Value") +
-    scale_fill_manual(values = eco_color_scheme)}
+    scale_fill_manual(values = eco_color_scheme)
+  
+  Elec_impact_figure
+  
+  }
 
 
 ## Making figure
 # SSP2-Baseline  
-CLI_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline, 'Climate change (kg CO2-Eq)', 0.6, -0.05, 0.6, 0)
-TAD_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline, 'Terrestrial acidification (kg SO2-Eq)', 0.0012, 0, 0.0012, 0)
-FET_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline, 'Freshwater ecotoxicity (kg 14-DCB)', 0.016, 0, 0.016, 0)
-TET_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline, 'Terrestrial ecotoxicity (kg 14-DCB)', 0.00008, 0, 0.00008, 0)
-HTO_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline, 'Human toxicity (kg 14-DCB)', 0.32, 0, 0.32, 0)
-FEU_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline, 'Freshwater eutrophication (kg P-Eq)', 0.00048, 0, 0.00048, 0)
-MDP_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline, 'Metal depletion (kg Fe-Eq)', 0.020, 0, 0.020, 0)
-WDP_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline, 'Water depletion (m3 water)', 0.0024, 0, 0.0024, 0)
+CLI_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline_final, 'Climate change (kg CO2-Eq)', 0.5, -0.1, 0.5, 0)
+TAD_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline_final, 'Terrestrial acidification (kg SO2-Eq)', 0.0012, 0, 0.0012, 0)
+FET_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline_final, 'Freshwater ecotoxicity (kg 14-DCB)', 0.016, 0, 0.016, 0)
+TET_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline_final, 'Terrestrial ecotoxicity (kg 14-DCB)', 0.00008, -0.000001, 0.00008, 0)
+HTO_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline_final, 'Human toxicity (kg 14-DCB)', 0.32, -0.02, 0.32, 0)
+FEU_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline_final, 'Freshwater eutrophication (kg P-Eq)', 0.00048, 0, 0.00048, 0)
+MDP_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline_final, 'Metal depletion (kg Fe-Eq)', 0.020, 0, 0.020, 0)
+WDP_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline_final, 'Water depletion (m3 water)', 0.0024, 0, 0.0024, 0)
 
 
 # SSP2-RCP19 w/o DACCS  
-CLI_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC, 'Climate change (kg CO2-Eq)', 0.6, -0.05, 0.6, 0)
-TAD_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC, 'Terrestrial acidification (kg SO2-Eq)', 0.0012, 0, 0.0012, 0)
-FET_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC, 'Freshwater ecotoxicity (kg 14-DCB)', 0.016, 0, 0.016, 0)
-TET_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC, 'Terrestrial ecotoxicity (kg 14-DCB)', 0.00008, 0, 0.00008, 0)
-HTO_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC, 'Human toxicity (kg 14-DCB)', 0.32, 0, 0.32, 0)
-FEU_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC, 'Freshwater eutrophication (kg P-Eq)', 0.00048, 0, 0.00048, 0)
-MDP_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC, 'Metal depletion (kg Fe-Eq)', 0.020, 0, 0.020, 0)
-WDP_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC, 'Water depletion (m3 water)', 0.0024, 0, 0.0024, 0)
+CLI_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC_final, 'Climate change (kg CO2-Eq)', 0.5, -0.1, 0.5, 0)
+TAD_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC_final, 'Terrestrial acidification (kg SO2-Eq)', 0.0012, 0, 0.0012, 0)
+FET_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC_final, 'Freshwater ecotoxicity (kg 14-DCB)', 0.016, 0, 0.016, 0)
+TET_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC_final, 'Terrestrial ecotoxicity (kg 14-DCB)', 0.00008, 0, 0.00008, 0)
+HTO_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC_final, 'Human toxicity (kg 14-DCB)', 0.32, -0.02, 0.32, 0)
+FEU_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC_final, 'Freshwater eutrophication (kg P-Eq)', 0.00048, 0, 0.00048, 0)
+MDP_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC_final, 'Metal depletion (kg Fe-Eq)', 0.020, 0, 0.020, 0)
+WDP_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC_final, 'Water depletion (m3 water)', 0.0024, 0, 0.0024, 0)
 
 # SSP2-RCP19 w/ DACCS  
-CLI_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19, 'Climate change (kg CO2-Eq)', 0.6, -0.05, 0.6, 0)
-TAD_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19, 'Terrestrial acidification (kg SO2-Eq)', 0.0012, 0, 0.0012, 0)
-FET_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19, 'Freshwater ecotoxicity (kg 14-DCB)', 0.016, 0, 0.016, 0)
-TET_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19, 'Terrestrial ecotoxicity (kg 14-DCB)', 0.00008, 0, 0.00008, 0)
-HTO_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19, 'Human toxicity (kg 14-DCB)', 0.32, 0, 0.32, 0)
-FEU_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19, 'Freshwater eutrophication (kg P-Eq)', 0.00048, 0 , 0.00048, 0)
-MDP_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19, 'Metal depletion (kg Fe-Eq)', 0.020, 0, 0.020, 0)
-WDP_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19, 'Water depletion (m3 water)', 0.0024, 0, 0.0024, 0)
+CLI_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19_final, 'Climate change (kg CO2-Eq)', 0.5, -0.1, 0.5, -0.1)
+TAD_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19_final, 'Terrestrial acidification (kg SO2-Eq)', 0.0012, 0, 0.0012, 0)
+FET_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19_final, 'Freshwater ecotoxicity (kg 14-DCB)', 0.016, 0, 0.016, 0)
+TET_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19_final, 'Terrestrial ecotoxicity (kg 14-DCB)', 0.00008, 0, 0.00008, 0)
+HTO_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19_final, 'Human toxicity (kg 14-DCB)', 0.32, -0.02, 0.32, 0)
+FEU_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19_final, 'Freshwater eutrophication (kg P-Eq)', 0.00048, 0 , 0.00048, 0)
+MDP_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19_final, 'Metal depletion (kg Fe-Eq)', 0.020, 0, 0.020, 0)
+WDP_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19_final, 'Water depletion (m3 water)', 0.0024, 0, 0.0024, 0)
 
 
 
@@ -979,7 +1104,7 @@ plot_grid(TET_elec_impact_baseline, TET_elec_impact_RCP19_noDAC, TET_elec_impact
 
 
 legend <- ggplot() +
-  geom_area(data = Elec_impact_data_baseline %>% filter(impact == 'Climate change (kg CO2-Eq)'),
+  geom_area(data = Elec_impact_US_RCP19_final %>% filter(impact_category == 'Metal depletion (kg Fe-Eq)'),
             aes(x = year, y = value, fill = tech)) +
   theme(axis.title.x = element_blank(),
         axis.title.y = element_blank(),
@@ -989,7 +1114,7 @@ legend <- ggplot() +
         axis.line = element_line(colour = "black", size = 0.5),
         strip.text = element_text(size = 16),
         strip.background = element_blank(),
-        legend.text = element_text(size = 18, face = "bold"),
+        legend.text = element_text(size = 10, face = "bold"),
         legend.title = element_blank(),
         legend.position = "left",
         legend.spacing.x = unit(0.3, 'cm'),
@@ -1007,9 +1132,13 @@ legend <- ggplot() +
 
 ## Export data to excel
 
-writeWorksheetToFile("C:/Users/yqiu/Box/DAC LCA-IAM/YQ_work/result/LCA_result/SI_Figure_9_data.xlsx", data = Elec_impact_US_baseline, sheet = "SSP2_Baseline")
-writeWorksheetToFile("C:/Users/yqiu/Box/DAC LCA-IAM/YQ_work/result/LCA_result/SI_Figure_9_data.xlsx", data = Elec_impact_US_RCP19_noDAC, sheet = "SSP2_RCP19")
-writeWorksheetToFile("C:/Users/yqiu/Box/DAC LCA-IAM/YQ_work/result/LCA_result/SI_Figure_9_data.xlsx", data = Elec_impact_US_RCP19, sheet = "SSP2_RCP19_DAC")
+Elec_impact_US_baseline_final_export <- as_tibble(Elec_impact_US_baseline_final)
+Elec_impact_US_RCP19_noDAC_final_export <- as_tibble(Elec_impact_US_RCP19_noDAC_final)
+Elec_impact_US_RCP19_final_export <- as_tibble(Elec_impact_US_RCP19_final)
+
+writeWorksheetToFile("C:/Users/yqiu/Box/DAC LCA-IAM/YQ_work/result/LCA_result/SI_Figure_9_data.xlsx", data = Elec_impact_US_baseline_final_export, sheet = "SSP2_Baseline")
+writeWorksheetToFile("C:/Users/yqiu/Box/DAC LCA-IAM/YQ_work/result/LCA_result/SI_Figure_9_data.xlsx", data = Elec_impact_US_RCP19_noDAC_final_export, sheet = "SSP2_RCP19")
+writeWorksheetToFile("C:/Users/yqiu/Box/DAC LCA-IAM/YQ_work/result/LCA_result/SI_Figure_9_data.xlsx", data = Elec_impact_US_RCP19_final_export, sheet = "SSP2_RCP19_DAC")
 
 
 ###############################################
