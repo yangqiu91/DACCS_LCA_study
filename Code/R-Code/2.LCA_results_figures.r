@@ -1040,14 +1040,14 @@ Contribution_figure_fun
 
 
 ## US
-US_cli_chan_con_figure <- Contribution_figure_fun (impact_name = "Climate change (kg CO2-Eq)", title_name = "a. Climate Change Impact", y_axis_name = expression('kg CO'[2]*'-Eq/kWh'), lower_l = -1400, upper_l = 700, lower_b = -1400, upper_b = 700)
-US_hum_toxi_con_figure <- Contribution_figure_fun (impact_name = "Human toxicity (kg 14-DCB)", title_name = "b. Human Toxicity Impact", y_axis_name = 'kg 14-DCB/kWh', lower_l = -0.001, upper_l = 440, lower_b = 0, upper_b = 440)
-US_fre_eutr_con_figure <- Contribution_figure_fun (impact_name = "Freshwater eutrophication (kg P-Eq)", title_name = "c. Freshwater Eutrophication Impact", y_axis_name = 'kg P-Eq/kWh', lower_l = -0.001, upper_l = 0.61, lower_b = 0, upper_b = 0.6)
-US_fre_ecot_con_figure <- Contribution_figure_fun (impact_name = "Freshwater ecotoxicity (kg 14-DCB)", title_name = "d. Freshwater Ecotoxicity Impact", y_axis_name = 'kg 14-DCB/kWh', lower_l = -0.001, upper_l = 24, lower_b = 0, upper_b = 24)
-US_ter_acid_con_figure <- Contribution_figure_fun (impact_name = "Terrestrial acidification (kg SO2-Eq)", title_name = "e. Terrestrial Acidification Impact", y_axis_name= expression('kg SO'[2]*'-Eq/kWh'), lower_l = -0.001, upper_l = 2, lower_b = 0, upper_b = 2)
-US_ter_ecot_con_figure <- Contribution_figure_fun (impact_name = "Terrestrial ecotoxicity (kg 14-DCB)", title_name = "f. Terrestrial Ecotoxicity Impact", y_axis_name = 'kg 14-DCB/kWh', lower_l = -0.001, upper_l = 0.08, lower_b = 0, upper_b = 0.08)
-US_met_depl_con_figure <- Contribution_figure_fun (impact_name = "Metal depletion (kg Fe-Eq)", title_name = "g. Metal Depletion", y_axis_name = 'kg Fe-Eq/kWh', lower_l = -0.001, upper_l = 40, lower_b = 0, upper_b = 40)
-US_wat_delp_con_figure <- Contribution_figure_fun (impact_name = "Water depletion (m3 water)", title_name = "h. Water Depletion", y_axis_name = expression('m'^3*'water/kWh'), lower_l = -0.001, upper_l = 12, lower_b = 0, upper_b = 12)
+US_cli_chan_con_figure <- Contribution_figure_fun (impact_name = "Climate change (kg CO2-Eq)", title_name = "a. Climate Change Impact", y_axis_name = expression('kg CO'[2]*'-Eq/t CO'[2]), lower_l = -1400, upper_l = 700, lower_b = -1400, upper_b = 700)
+US_hum_toxi_con_figure <- Contribution_figure_fun (impact_name = "Human toxicity (kg 14-DCB)", title_name = "b. Human Toxicity Impact", y_axis_name = expression('kg 14-DCB/t CO'[2]), lower_l = -0.001, upper_l = 440, lower_b = 0, upper_b = 440)
+US_fre_eutr_con_figure <- Contribution_figure_fun (impact_name = "Freshwater eutrophication (kg P-Eq)", title_name = "c. Freshwater Eutrophication Impact", y_axis_name = expression('kg P-Eq/t CO'[2]), lower_l = -0.001, upper_l = 0.61, lower_b = 0, upper_b = 0.6)
+US_fre_ecot_con_figure <- Contribution_figure_fun (impact_name = "Freshwater ecotoxicity (kg 14-DCB)", title_name = "d. Freshwater Ecotoxicity Impact", y_axis_name = expression('kg 14-DCB/t CO'[2]), lower_l = -0.001, upper_l = 24, lower_b = 0, upper_b = 24)
+US_ter_acid_con_figure <- Contribution_figure_fun (impact_name = "Terrestrial acidification (kg SO2-Eq)", title_name = "e. Terrestrial Acidification Impact", y_axis_name= expression('kg SO'[2]*'-Eq/t CO'[2]), lower_l = -0.001, upper_l = 2, lower_b = 0, upper_b = 2)
+US_ter_ecot_con_figure <- Contribution_figure_fun (impact_name = "Terrestrial ecotoxicity (kg 14-DCB)", title_name = "f. Terrestrial Ecotoxicity Impact", y_axis_name = expression('kg 14-DCB/t CO'[2]), lower_l = -0.001, upper_l = 0.08, lower_b = 0, upper_b = 0.08)
+US_met_depl_con_figure <- Contribution_figure_fun (impact_name = "Metal depletion (kg Fe-Eq)", title_name = "g. Metal Depletion", y_axis_name = expression('kg Fe-Eq/t CO'[2]), lower_l = -0.001, upper_l = 40, lower_b = 0, upper_b = 40)
+US_wat_delp_con_figure <- Contribution_figure_fun (impact_name = "Water depletion (m3 water)", title_name = "h. Water Depletion", y_axis_name = expression('m'^3*'water/t CO'[2]), lower_l = -0.001, upper_l = 12, lower_b = 0, upper_b = 12)
 
 
 
