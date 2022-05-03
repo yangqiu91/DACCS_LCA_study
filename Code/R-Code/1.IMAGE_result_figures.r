@@ -18,6 +18,9 @@ library(ggpubr)
 library(patternplot)
 library(png)
 
+library(extrafont)
+font_import()
+loadfonts(device = "win")
 
 ## Data Import
 ###############################################
@@ -110,55 +113,68 @@ tech_sort_agg = c('Coal',
                   'Other_renewables')
 
 
-gen_type_color_scheme = c('Coal_ST' = 'black', 
-    'IGCC' = 'black',
-    'Coal_CHP' = 'black', 
-    'Coal_CCS' = 'gray30', 
-    'Coal_CHP_CCS' = 'gray30', 
-    'Natural_gas_CC' = "gray50", 
-    'Natural_gas_OC' = "gray50",
-    'Natural_gas_CHP' = "gray50", 
-    'Natural_gas_CCS' = "gray80",
-    'Natural_gas_CHP_CCS' = "gray80", 
-    'Oil_ST' = "brown3", 
-    'Oil_CC' = "brown3", 
-    'Oil_CHP' = "brown3", 
-    'Oil_CCS' = "brown3", 
-    'Oil_CHP_CCS' = "brown3", 
-    'Nuclear' = "cyan", 
-    'Hydro' = rgb(170/256, 255/256, 195/256), 
-    'Wind_onshore' = "blue", 
-    'Wind_offshore' = "blue",
-    'CSP' = "yellow", 
-    'Solar_PV_decen' = "yellow", 
-    'Solar_PV_cen' = "yellow", 
-    'Biomass_ST' = "green3", 
-    'Biomass_CC' = "green3", 
-    'Biomass_CHP' = "green3", 
-    'Biomass_CCS' = "green",
-    'Biomass_CHP_CCS' = "green", 
-    'Wave' = "red", 
-    'Other_renewables' = "red")
+gen_type_color_scheme = c(
+    'Coal_ST' = rgb(0/256, 0/256, 0/256), 
+    'IGCC' = rgb(0/256, 0/256, 0/256),  
+    'Coal_CHP' = rgb(0/256, 0/256, 0/256), 
+    
+    'Coal_CCS' = rgb(82/256, 82/256, 82/256),
+    'Coal_CHP_CCS' = rgb(82/256, 82/256, 82/256),
+    
+    'Natural_gas_CC' = rgb(115/256, 115/256, 115/256),
+    'Natural_gas_OC' = rgb(115/256, 115/256, 115/256),
+    'Natural_gas_CHP' = rgb(115/256, 115/256, 115/256),
+    
+    'Natural_gas_CCS' = rgb(189/256, 189/256, 189/256),
+    'Natural_gas_CHP_CCS' = rgb(189/256, 189/256, 189/256),
+    
+    'Oil_ST' = rgb(130/256, 0/256, 0/256),
+    'Oil_CC' = rgb(130/256, 0/256, 0/256),
+    'Oil_CHP' = rgb(130/256, 0/256, 0/256),
+    'Oil_CCS' = rgb(130/256, 0/256, 0/256),
+    'Oil_CHP_CCS' = rgb(130/256, 0/256, 0/256),
+    
+    'Nuclear' = rgb(8/256, 48/256, 107/256), 
+    
+    'Hydro' = rgb(33/256, 113/256, 181/256),
+    
+    'Wind_onshore' = rgb(0/256, 182/256, 239/256),  
+    'Wind_offshore' = rgb(0/256, 182/256, 239/256),  
+    
+    'CSP' = rgb(255/256, 204/256, 0/256),
+    'Solar_PV_decen' = rgb(255/256, 204/256, 0/256),
+    'Solar_PV_cen' = rgb(255/256, 204/256, 0/256),
+    
+    'Biomass_ST' = rgb(0/256, 109/256, 44/256), 
+    'Biomass_CC' = rgb(0/256, 109/256, 44/256),
+    'Biomass_CHP' = rgb(0/256, 109/256, 44/256),
+    
+    'Biomass_CCS' = rgb(106/256, 169/256, 118/256), 
+    'Biomass_CHP_CCS' = rgb(106/256, 169/256, 118/256), 
+    
+    'Wave' = rgb(252/256, 118/256, 26/256),  
+    'Other_renewables' = rgb(252/256, 118/256, 26/256))
 
-color_scheme_agg = c('Coal' = 'black', 
-                     'Coal_CCS' = 'gray30', 
-                     'Natural_gas' = "gray50", 
-                     'Natural_gas_CCS' = "gray80",
-                     'Oil' = "brown3", 
-                     'Oil_CCS' = "brown3",
-                     'Nuclear' = "cyan", 
-                     'Hydro' = rgb(170/256, 255/256, 195/256), 
-                     'Wind' = "blue", 
-                     'Solar' = "yellow", 
-                     'Biomass' = "green3", 
-                     'Biomass_CCS' = "green",
-                     'Other_renewables' = "red")
+color_scheme_agg = c('Coal' = rgb(0/256, 0/256, 0/256),
+                     'Coal_CCS' = rgb(82/256, 82/256, 82/256),
+                     'Natural_gas' = rgb(115/256, 115/256, 115/256),
+                     'Natural_gas_CCS' = rgb(189/256, 189/256, 189/256),
+                     'Oil' = rgb(130/256, 0/256, 0/256),
+                     'Oil_CCS' = rgb(130/256, 0/256, 0/256),
+                     'Nuclear' = rgb(8/256, 48/256, 107/256), 
+                     'Hydro' = rgb(33/256, 113/256, 181/256),
+                     'Wind' = rgb(0/256, 182/256, 239/256),  
+                     'Solar' =  rgb(255/256, 204/256, 0/256),
+                     'Biomass' = rgb(0/256, 109/256, 44/256),
+                     'Biomass_CCS' = rgb(106/256, 169/256, 118/256), 
+                     'Other_renewables' = rgb(252/256, 118/256, 26/256))
 
 
-Climate_color_scheme = c('SSP2' = 'black', 
-                         'RCP19'= 'blue',
-                         'RCP19_DAC' = 'skyblue2')
+Climate_color_scheme = c('SSP2' = rgb(0/256, 0/256, 0/256),
+                         'RCP19'= rgb(8/256, 81/256, 156/256),
+                         'RCP19_DAC' = rgb(158/256, 202/256, 225/256))
 
+font_size = 12
 ###############################################
 
 
@@ -251,34 +267,41 @@ DAC_elec_demand_ratio <- merge(DAC_elec_demand_clean, Region_total_gen, by = c("
 
 ## End of Data wrangling 
 
-
+windowsFonts()
 
 ## Start to make figures
 # Function for Figure 2a, 2b
-elec_mix_figure_fun <- function(climate_scenario, region_name, sec_coeff_value){
+elec_mix_figure_fun <- function(climate_scenario, region_name, sec_coeff_value, title_sce_name){
   
   year_10 <- c(2020, 2030, 2040, 2050, 2060, 2070, 2080, 2090, 2100)
   elec_mix_data_figure <- Elect_mix_data_fig %>% filter(region == region_name & Climate == climate_scenario & year %in% year_10)
 
   
   sec_coeff = sec_coeff_value
+  title_name = title_sce_name
   
   elec_mix_figure <- 
     ggplot() + 
     geom_area(data = elec_mix_data_figure, aes(x = year, y = mix, fill = tech)) + 
+    labs(title = title_name, x = "Year", y = "Electricity mix (%)") +
 
-    theme(plot.margin = margin(0.5,0.5,1.5,2.0, "cm"),
-          axis.title.x = element_blank(),
-          axis.title.y = element_blank(),
-          axis.text.x = element_text(size = 20),
-          axis.text.y = element_text(size = 20),
+    theme(plot.margin = margin(0.5,0.5,0.5,0.5, "cm"),
+          plot.title = element_text(size = font_size),
+          axis.title.x = element_text(size = font_size),
+          axis.title.y = element_text(size = font_size),
+          #axis.text.x = element_blank(),
+          #axis.text.y = element_blank(),
+          axis.text.x = element_text(size = font_size),
+          axis.text.y = element_text(size = font_size),
+          text = element_text(size = font_size, family = "sans"),
+          
           axis.line = element_line(colour = "black", size = 0.5, linetype = "solid"),
           panel.background = element_blank(),
           panel.border = element_blank(),
-          strip.text = element_text(size = 16),
+          strip.text = element_text(size = font_size),
           strip.background = element_blank(),
           legend.title = element_blank(),
-          legend.text = element_text(size = 20),
+          legend.text = element_text(size = font_size),
           legend.direction = "horizontal",
           legend.position = "none",
           legend.spacing.x = unit(0.5, 'cm'),
@@ -295,7 +318,7 @@ elec_mix_figure_fun <- function(climate_scenario, region_name, sec_coeff_value){
 
 
 # Function for Figure 2c
-elec_mix_figure_fun2 <- function(climate_scenario, region_name, sec_coeff_value, scale_num_value){
+elec_mix_figure_fun2 <- function(climate_scenario, region_name, sec_coeff_value, scale_num_value, title_sce_name){
   
   year_10 <- c(2020, 2030, 2040, 2050, 2060, 2070, 2080, 2090, 2100)
   
@@ -304,23 +327,31 @@ elec_mix_figure_fun2 <- function(climate_scenario, region_name, sec_coeff_value,
   
   sec_coeff = sec_coeff_value
   scale_num = scale_num_value
+  title_name = title_sce_name
   
   elec_mix_figure <- 
     ggplot() + 
     geom_area(data = elec_mix_data_figure, aes(x = year, y = mix, fill = tech)) + 
-    geom_line(data = DAC_elec_demand_figure, aes(x = year, y = DAC_elect_demand_r*scale_num), color = 'red', linetype = 'dashed', size = 1.6) + 
-    theme(plot.margin = margin(0.5,0.5,1.5,2.0, "cm"),
-          axis.title.x = element_blank(),
-          axis.title.y = element_blank(),
-          axis.text.x = element_text(size = 20),
-          axis.text.y = element_text(size = 20),
+    geom_line(data = DAC_elec_demand_figure, aes(x = year, y = DAC_elect_demand_r*scale_num), color = 'red', linetype = 'dashed', size = 1.0) + 
+    labs(title = title_name, x = "Year", y = "Electricity mix (%)") +
+    theme(plot.margin = margin(0.5,0.5,0.5,0.5, "cm"),
+          plot.title = element_text(size = font_size),
+          axis.title.x = element_text(size = font_size),
+          axis.title.y = element_text(size = font_size),
+          #axis.title.x = element_blank(),
+          #axis.title.y = element_blank(),
+          #axis.text.x = element_blank(),
+          #axis.text.y = element_blank(),
+          axis.text.x = element_text(size = font_size),
+          axis.text.y = element_text(size = font_size),
+          text = element_text(size = font_size, family = "sans"),
           axis.line = element_line(colour = "black", size = 0.5, linetype = "solid"),
           panel.background = element_blank(),
           panel.border = element_blank(),
-          strip.text = element_text(size = 16),
+          strip.text = element_text(size = font_size),
           strip.background = element_blank(),
           legend.title = element_blank(),
-          legend.text = element_text(size = 20),
+          legend.text = element_text(size = font_size),
           legend.direction = "horizontal",
           legend.position = "none",
           legend.spacing.x = unit(0.5, 'cm'),
@@ -331,40 +362,52 @@ elec_mix_figure_fun2 <- function(climate_scenario, region_name, sec_coeff_value,
                       values = gen_type_color_scheme,
                       guide = guide_legend(reverse=TRUE, nrow = 5)) +
     scale_y_continuous(labels = scales::percent,
-                       sec.axis = sec_axis(~./scale_num, name="Second Axis", labels = scales::percent_format(accuracy = 1)))
+                       sec.axis = sec_axis(~./scale_num, name="Percent of annual generation \n consumed by DACCS (%)", labels = scales::percent_format(accuracy = 1)))
   
   elec_mix_figure
 }
 
 # Function for Figure 2d
-elec_co2_figure_fun <- function(region_name, lower_b, upper_b){
+elec_co2_figure_fun <- function(region_name, lower_b, upper_b, title_sce_name){
   
   elec_co2_data_figure <- Elect_co2_data_fig %>% filter(region == region_name)
+  title_name = title_sce_name
   
   elec_co2_figure <- 
     ggplot() + 
     
-    geom_line(data = elec_co2_data_figure, aes(x = year, y = elec_co2_Gt, group = Climate, color = Climate), size = 1.6) + 
+    geom_line(data = elec_co2_data_figure, aes(x = year, y = elec_co2_Gt, group = Climate, color = Climate), size = 1.0) + 
     geom_hline(yintercept = 0, linetype="dashed", color = "black") +
-    theme(plot.margin = margin(0.5,0.5,1.5,2.0, "cm"),
-          axis.title.x = element_blank(),
-          axis.title.y = element_blank(),
-          axis.text.x = element_text(size = 20),
-          axis.text.y = element_text(size = 20),
+    labs(title = title_name, x = "Year", y = expression("CO"[2]*" emission (Gt)")) +
+    theme(plot.margin = margin(0.5,0.5,0.5,0.5, "cm"),
+          plot.title = element_text(size = font_size),
+          axis.title.x = element_text(size = font_size),
+          axis.title.y = element_text(size = font_size),
+          #axis.title.x = element_blank(),
+          #axis.title.y = element_blank(),
+          #axis.text.x = element_blank(),
+          #axis.text.y = element_blank(),
+          axis.text.x = element_text(size = font_size),
+          axis.text.y = element_text(size = font_size),
+          text = element_text(size = font_size, family = "sans"),
           axis.line = element_line(colour = "black", size = 0.5, linetype = "solid"),
           panel.background = element_blank(),
           panel.border = element_blank(),
-          strip.text = element_text(size = 16),
+          strip.text = element_text(size = font_size),
           strip.background = element_blank(),
           legend.title = element_blank(),
-          legend.text = element_text(size = 20),
-          legend.direction = "horizontal",
-          legend.position = "none",
-          legend.spacing.x = unit(0.5, 'cm'),
-          legend.spacing.y = unit(0.8, 'cm'),
-          legend.key.size = unit(1, "cm"),
-          panel.spacing.x = unit(0.8, 'cm')) +
-    scale_color_manual(values = Climate_color_scheme) +
+          legend.text = element_text(size = font_size),
+          legend.direction = "vertical",
+          legend.position = c(0.35, 0.16),
+          #legend.spacing.x = unit(0.2, 'cm'),
+          legend.spacing.y = unit(0.5, 'cm'),
+          legend.background = element_rect(fill='transparent'),
+          legend.box.background = element_rect(fill='transparent', color = NA),
+          legend.key = element_blank(),
+          legend.key.height = unit(0.6, 'cm'),
+          legend.key.width = unit(1, 'cm'),
+           panel.spacing.x = unit(0.8, 'cm')) +
+    scale_color_manual(values = Climate_color_scheme, labels = c("SSP2-Baseline", "SSP2-RCP1.9 w/o DACCS", "SSP2-RCP1.9 w/ DACCS")) +
     scale_y_continuous(limits = c(lower_b, upper_b), breaks = c(seq(lower_b, upper_b, (upper_b - lower_b)/4)))
   
   elec_co2_figure
@@ -374,42 +417,42 @@ elec_co2_figure_fun <- function(region_name, lower_b, upper_b){
 
 ## Making figures
 
-US_elec_SSP2_figure <- elec_mix_figure_fun(climate_scenario = 'SSP2', region_name = 'US', 8000)
-US_elec_RCP19_figure <- elec_mix_figure_fun(climate_scenario = 'RCP19', region_name = 'US', 8000)
-US_elec_RCP19_DAC_figure <- elec_mix_figure_fun2(climate_scenario = 'RCP19_DAC', region_name = 'US', 8000, 17)
-US_elec_CO2_figure <- elec_co2_figure_fun(region_name = 'US', lower_b = -2, upper_b = 2)
+US_elec_SSP2_figure <- elec_mix_figure_fun(climate_scenario = 'SSP2', region_name = 'US', 8000, title_sce_name = 'a. SSP2-Baseline')
+US_elec_RCP19_figure <- elec_mix_figure_fun(climate_scenario = 'RCP19', region_name = 'US', 8000, title_sce_name = 'b. SSP2-RCP1.9 w/o DACCS')
+US_elec_RCP19_DAC_figure <- elec_mix_figure_fun2(climate_scenario = 'RCP19_DAC', region_name = 'US', 8000, 17, title_sce_name = 'c. SSP2-RCP1.9 w/ DACCS')
+US_elec_CO2_figure <- elec_co2_figure_fun(region_name = 'US', lower_b = -2, upper_b = 2, title_sce_name = expression("d. Annual CO"[2]*" emission of electricity system"))
 
 plot_grid(US_elec_SSP2_figure, US_elec_RCP19_figure, US_elec_RCP19_DAC_figure, US_elec_CO2_figure, ncol=2, align="v")  
 
 
-CN_elec_SSP2_figure <- elec_mix_figure_fun(climate_scenario = 'SSP2', region_name = 'China', 16000)
-CN_elec_RCP19_figure <- elec_mix_figure_fun(climate_scenario = 'RCP19', region_name = 'China', 16000)
-CN_elec_RCP19_DAC_figure <- elec_mix_figure_fun2(climate_scenario = 'RCP19_DAC', region_name = 'China', 16000, 33)
-CN_elec_CO2_figure <- elec_co2_figure_fun(region_name = 'China', lower_b = -3, upper_b = 9)
+CN_elec_SSP2_figure <- elec_mix_figure_fun(climate_scenario = 'SSP2', region_name = 'China', 16000, title_sce_name = 'a. SSP2-Baseline')
+CN_elec_RCP19_figure <- elec_mix_figure_fun(climate_scenario = 'RCP19', region_name = 'China', 16000, title_sce_name = 'b. SSP2-RCP1.9 w/o DACCS')
+CN_elec_RCP19_DAC_figure <- elec_mix_figure_fun2(climate_scenario = 'RCP19_DAC', region_name = 'China', 16000, 33, title_sce_name = 'c. SSP2-RCP1.9 w/ DACCS')
+CN_elec_CO2_figure <- elec_co2_figure_fun(region_name = 'China', lower_b = -3, upper_b = 9, title_sce_name = expression("d. Annual CO"[2]*" emission of electricity system"))
 
 plot_grid(CN_elec_SSP2_figure,CN_elec_RCP19_figure, CN_elec_RCP19_DAC_figure,  CN_elec_CO2_figure, ncol=2, align="v")  
 
 
-RU_elec_SSP2_figure <- elec_mix_figure_fun(climate_scenario = 'SSP2', region_name = 'Russia', 3600)
-RU_elec_RCP19_figure <- elec_mix_figure_fun(climate_scenario = 'RCP19', region_name = 'Russia', 3600)
-RU_elec_RCP19_DAC_figure <- elec_mix_figure_fun2(climate_scenario = 'RCP19_DAC', region_name = 'Russia', 3600, 2.5)
-RU_elec_CO2_figure <- elec_co2_figure_fun(region_name = 'Russia', lower_b = -0.3, upper_b = 0.9)
+RU_elec_SSP2_figure <- elec_mix_figure_fun(climate_scenario = 'SSP2', region_name = 'Russia', 3600, title_sce_name = 'a. SSP2-Baseline')
+RU_elec_RCP19_figure <- elec_mix_figure_fun(climate_scenario = 'RCP19', region_name = 'Russia', 3600, title_sce_name = 'b. SSP2-RCP1.9 w/o DACCS')
+RU_elec_RCP19_DAC_figure <- elec_mix_figure_fun2(climate_scenario = 'RCP19_DAC', region_name = 'Russia', 3600, 2.5, title_sce_name = 'c. SSP2-RCP1.9 w/ DACCS')
+RU_elec_CO2_figure <- elec_co2_figure_fun(region_name = 'Russia', lower_b = -0.3, upper_b = 0.9, title_sce_name = expression("d. Annual CO"[2]*" emission of electricity system"))
 
 plot_grid(RU_elec_SSP2_figure,RU_elec_RCP19_figure,  RU_elec_RCP19_DAC_figure, RU_elec_CO2_figure, ncol=2, align="v")  
 
 
-EU_elec_SSP2_figure <- elec_mix_figure_fun(climate_scenario = 'SSP2', region_name = 'Western_EU', 6000)
-EU_elec_RCP19_figure <- elec_mix_figure_fun(climate_scenario = 'RCP19', region_name = 'Western_EU', 6000)
-EU_elec_RCP19_DAC_figure <- elec_mix_figure_fun2(climate_scenario = 'RCP19_DAC', region_name = 'Western_EU', 6000, 33)
-EU_elec_CO2_figure <- elec_co2_figure_fun(region_name = 'Western_EU', lower_b = -1.6, upper_b = 1.6)
+EU_elec_SSP2_figure <- elec_mix_figure_fun(climate_scenario = 'SSP2', region_name = 'Western_EU', 6000, title_sce_name = 'a. SSP2-Baseline')
+EU_elec_RCP19_figure <- elec_mix_figure_fun(climate_scenario = 'RCP19', region_name = 'Western_EU', 6000, title_sce_name = 'b. SSP2-RCP1.9 w/o DACCS')
+EU_elec_RCP19_DAC_figure <- elec_mix_figure_fun2(climate_scenario = 'RCP19_DAC', region_name = 'Western_EU', 6000, 33, title_sce_name = 'c. SSP2-RCP1.9 w/ DACCS')
+EU_elec_CO2_figure <- elec_co2_figure_fun(region_name = 'Western_EU', lower_b = -1.6, upper_b = 1.6, title_sce_name = expression("d. Annual CO"[2]*" emission of electricity system"))
 
 plot_grid(EU_elec_SSP2_figure, EU_elec_RCP19_figure, EU_elec_RCP19_DAC_figure, EU_elec_CO2_figure, ncol=2, align="v")  
 
 
-GL_elec_SSP2_figure <- elec_mix_figure_fun(climate_scenario = 'SSP2', region_name = 'World', 106000)
-GL_elec_RCP19_figure <- elec_mix_figure_fun(climate_scenario = 'RCP19', region_name = 'World', 106000)
-GL_elec_RCP19_DAC_figure <- elec_mix_figure_fun2(climate_scenario = 'RCP19_DAC', region_name = 'World', 106000, 13)
-GL_elec_CO2_figure <- elec_co2_figure_fun(region_name = 'World', lower_b = -26, upper_b = 26)
+GL_elec_SSP2_figure <- elec_mix_figure_fun(climate_scenario = 'SSP2', region_name = 'World', 106000, title_sce_name = 'a. SSP2-Baseline')
+GL_elec_RCP19_figure <- elec_mix_figure_fun(climate_scenario = 'RCP19', region_name = 'World', 106000, title_sce_name = 'b. SSP2-RCP1.9 w/o DACCS')
+GL_elec_RCP19_DAC_figure <- elec_mix_figure_fun2(climate_scenario = 'RCP19_DAC', region_name = 'World', 106000, 13, title_sce_name = 'c. SSP2-RCP1.9 w/ DACCS')
+GL_elec_CO2_figure <- elec_co2_figure_fun(region_name = 'World', lower_b = -26, upper_b = 26, title_sce_name = expression("d. Annual CO"[2]*" emission of electricity system"))
 
 plot_grid(GL_elec_SSP2_figure, GL_elec_RCP19_figure, GL_elec_RCP19_DAC_figure, GL_elec_CO2_figure, ncol=2, align="v")  
 
@@ -417,8 +460,10 @@ plot_grid(GL_elec_SSP2_figure, GL_elec_RCP19_figure, GL_elec_RCP19_DAC_figure, G
 
 # Making legend 
 legend <- 
-  ggplot(Elect_gen_data) + 
-  geom_area(aes(x = year, y = World/1000, fill = tech)) + 
+  ggplot() + 
+  geom_area(data = elec_mix_data_figure, aes(x = year, y = mix, fill = tech)) + 
+  labs(title = title_name, x = "Year", y = "Electricity mix (%)") +
+  
   facet_wrap(~ Climate, nrow = 1) +
   theme(plot.margin = margin(0.5,0.5,0.5,0.5, "cm"),
         axis.title.x = element_blank(),
@@ -484,7 +529,7 @@ writeWorksheetToFile("C:/Users/yqiu/Box/DAC LCA-IAM/YQ_work/result/Electricity_m
 
 
 
-## Figure 3a Generation difference between SSP2-RCP1.9 with and without DACCS and annual DACCS operational capacity
+## Figure 3 Generation difference between SSP2-RCP1.9 with and without DACCS and annual DACCS operational capacity
 ###############################################
 
 ## Data wrangling (generation difference)
@@ -604,11 +649,12 @@ Elec_gen_diff_figure <- ggplot() +
   geom_hline(yintercept = 0, color = "black", size = 0.5) +
   #  facet_wrap(~ region, nrow = 1) +
   theme(plot.margin = margin(0.5,0.5,0.5,0.5, "cm"),
-        axis.title.x = element_blank(),
-        axis.title.y = element_blank(),
-        axis.text.x = element_text(size = 20),
-        axis.text.y = element_text(size = 20),
+        axis.title.x = element_text(size = font_size),
+        axis.title.y = element_text(size = font_size),
+        axis.text.x = element_text(size = font_size),
+        axis.text.y = element_text(size = font_size),
         axis.line = element_line(colour = "black", size = 0.5, linetype = "solid"),
+        text = element_text(size = font_size, family = "sans"),
         panel.background = element_blank(),
         panel.border = element_blank(),
         strip.text = element_text(size = 16),
@@ -624,11 +670,12 @@ Elec_gen_diff_figure <- ggplot() +
   scale_fill_manual(name = "Generation technologies", 
                     values = color_scheme_agg,
                     guide = guide_legend(reverse=TRUE, nrow = 6)) +
-  scale_x_continuous(breaks=c(2020, 2040, 2060, 2080, 2100)) +
+  scale_x_continuous(breaks=c(2020, 2040, 2060, 2080, 2100), name = "Year") +
   #scale_y_continuous(limits = c(-1000, 1000), breaks = c(seq(-1000, 1000, 500)), name = "Value")
-  scale_y_continuous(limits = c(-650, 650), breaks = c(seq(-600, 600, 300)), name = "Value",
-                     sec.axis = sec_axis(~.*0.002, name="Second Axis", breaks = c(seq(-1.0, 1.0, 0.5))))
+  scale_y_continuous(limits = c(-650, 650), breaks = c(seq(-600, 600, 300)), name = "Electricity generation difference (TWh)",
+                     sec.axis = sec_axis(~.*0.002, name="Annual DACCS operational capacity (Gt/year)", breaks = c(seq(-1.0, 1.0, 0.5))))
 
+Elec_gen_diff_figure
 ## end of figure 
 
 
@@ -673,9 +720,11 @@ PE_use_overall <- PE_use_RCP19 %>%
 PE_use_overall_point <- PE_use_overall %>% group_by(year, region) %>%
   summarise(annual_net_diff_EJ = sum(PE_use_diff_EJ))
 
+#PE_use_overall$year <- as.character(PE_use_overall$year)
+#PE_use_overall_point$year <- as.character(PE_use_overall_point$year)
 
 # Figure function
-PE_use_figure_fun  <- function(region_name, lower_l, upper_l, lower_b, upper_b){
+PE_use_figure_fun  <- function(region_name, title_name, lower_l, upper_l, lower_b, upper_b){
   
   
   #figure_data <- PE_use_overall %>% filter(region == 'China')
@@ -687,25 +736,27 @@ PE_use_figure_fun  <- function(region_name, lower_l, upper_l, lower_b, upper_b){
                           'Conventional Oil'= 'gray50',
                           'Unconventional Oil'= 'gray50',
                           'Natural Gas' = 'gray80')
-  
+
   PE_use_figure <- 
     ggplot() + 
     
     geom_bar(data = figure_data,
              aes(x = year, y = PE_use_diff_EJ, fill = tech), position = "stack", stat = "identity", width = 5) + 
     geom_point(data = point_data,
-               aes(x = year, y = annual_net_diff_EJ), color = 'red', size = 7) + 
-    geom_hline(yintercept = 0, linetype = "dashed", color = "black", size = 1) +
-    
-    theme(plot.margin = margin(0.5,0.5,1.5,2.0, "cm"),
+               aes(x = year, y = annual_net_diff_EJ), color = rgb(252/256, 118/256, 26/256), size = 2.5) + 
+    geom_hline(yintercept = 0, linetype = "dashed", color = "black", size = 0.8) +
+    labs(title = title_name, x = "Year") +
+    theme(plot.margin = margin(0.05,0.6,0.6,0.5, "cm"),
+          plot.title = element_text(size = font_size), 
           axis.title.x = element_blank(),
           axis.title.y = element_blank(),
-          axis.text.x = element_text(size = 26),
-          axis.text.y = element_text(size = 26),
+          axis.text.x = element_text(size = font_size),
+          axis.text.y = element_text(size = font_size),
           axis.line = element_line(colour = "black", size = 0.5, linetype = "solid"),
+          text = element_text(size = font_size, family = "sans"),
           panel.background = element_blank(),
           panel.border = element_blank(),
-          strip.text = element_text(size = 16),
+          strip.text = element_text(size = font_size),
           strip.background = element_blank(),
           legend.title = element_blank(),
           legend.text = element_text(size = 20),
@@ -715,7 +766,7 @@ PE_use_figure_fun  <- function(region_name, lower_l, upper_l, lower_b, upper_b){
           legend.spacing.y = unit(0.8, 'cm'),
           legend.key.size = unit(1, "cm"),
           panel.spacing.x = unit(0.8, 'cm')) +
-    scale_fill_manual(values = NG_use_color_scheme) +
+    scale_fill_manual(values = PE_use_color_scheme) +
     #    scale_x_continuous(breaks = year_10) +
     scale_y_continuous(limits = c(lower_l, upper_l), breaks = c(seq(lower_b, upper_b, (upper_b - lower_b)/4)))
   
@@ -725,16 +776,18 @@ PE_use_figure_fun  <- function(region_name, lower_l, upper_l, lower_b, upper_b){
 
 
 # Making figures
-US_PE_use_figure <- PE_use_figure_fun(region_name = 'US', lower_l = -1, upper_l = 12, lower_b = 0, upper_b = 12)
-CN_PE_use_figure <- PE_use_figure_fun(region_name = 'China', lower_l = -1, upper_l = 12, lower_b = 0, upper_b = 12)
-RU_PE_use_figure <- PE_use_figure_fun(region_name = 'Russia', lower_l = -1.8, upper_l = 12, lower_b = 0, upper_b = 12)
-EU_PE_use_figure <- PE_use_figure_fun(region_name = 'Western_EU', lower_l = -1, upper_l = 12, lower_b = 0, upper_b = 12)
-GL_PE_use_figure <- PE_use_figure_fun(region_name = 'World', lower_l = -2, upper_l = 200, lower_b = 0, upper_b = 200)
+US_PE_use_figure <- PE_use_figure_fun(region_name = 'US', title_name = "a. United States", lower_l = -1, upper_l = 12, lower_b = 0, upper_b = 12)
+CN_PE_use_figure <- PE_use_figure_fun(region_name = 'China', title_name = "b. China", lower_l = -1, upper_l = 12, lower_b = 0, upper_b = 12)
+RU_PE_use_figure <- PE_use_figure_fun(region_name = 'Russia', title_name = "c. Russia", lower_l = -1.8, upper_l = 12, lower_b = 0, upper_b = 12)
+EU_PE_use_figure <- PE_use_figure_fun(region_name = 'Western_EU', title_name = "d. Western Europe", lower_l = -1, upper_l = 12, lower_b = 0, upper_b = 12)
+GL_PE_use_figure <- PE_use_figure_fun(region_name = 'World', title_name = "e. World", lower_l = -2, upper_l = 200, lower_b = 0, upper_b = 200)
 
 
-plot_grid(US_PE_use_figure, CN_PE_use_figure, ncol=1, align="v")  
-plot_grid(RU_PE_use_figure, EU_PE_use_figure, ncol=1, align="v")
-plot_grid(GL_PE_use_figure, GL_PE_use_figure, ncol=1, align="v")  
+plot_grid(US_PE_use_figure, CN_PE_use_figure, RU_PE_use_figure, EU_PE_use_figure, GL_PE_use_figure, ncol=1, align="v") 
+
+#plot_grid(US_PE_use_figure, CN_PE_use_figure, ncol=1, align="v")  
+#plot_grid(RU_PE_use_figure, EU_PE_use_figure, ncol=1, align="v")
+#plot_grid(GL_PE_use_figure, GL_PE_use_figure, ncol=1, align="v")  
 
 
 # Export data
@@ -814,13 +867,13 @@ co2_seq_data$year <- as.numeric(co2_seq_data$year)
 
 
 ## Figure function
-co2_seq_figure_fun  <- function(region_name, lower_l, upper_l, lower_b, upper_b){
+co2_seq_figure_fun  <- function(region_name, title_name, lower_l, upper_l, lower_b, upper_b){
   
   
   #figure_data <- co2_seq_data %>% filter(region == 'US')
   figure_data <- co2_seq_data %>% filter(region == region_name)
-  co2_seq_color_scheme = c('BECCS' = 'green', 
-                           'DACCS'= 'skyblue2',
+  co2_seq_color_scheme = c('BECCS' = rgb(106/256, 169/256, 118/256),
+                           'DACCS'= rgb(0/256, 182/256, 239/256),  
                            'Other' = 'gray80')
   
   co2_seq_figure <- 
@@ -830,13 +883,16 @@ co2_seq_figure_fun  <- function(region_name, lower_l, upper_l, lower_b, upper_b)
              aes(x = year - 2, y = co2_seq_Gt, fill = tech), position = "stack", stat = "identity", width = 3) + 
     geom_bar(data = figure_data %>% filter(scenario == 'RCP19_DAC'),
              aes(x = year + 2, y = co2_seq_Gt, fill = tech), position = "stack", stat = "identity", width = 3) + 
+    labs(title = title_name, x = "Year", y = expression('Annual total CO'[2] * ' sequestration (Gt)')) +
     #facet_wrap(~ scenario , nrow = 1) + 
-    theme(plot.margin = margin(0.5,0.5,1.5,2.0, "cm"),
-          axis.title.x = element_blank(),
-          axis.title.y = element_blank(),
-          axis.text.x = element_text(size = 26),
-          axis.text.y = element_text(size = 26),
+    theme(plot.margin = margin(0.1,0.5,0.5, 0.5, "cm"),
+          plot.title = element_text(size = font_size),
+          axis.title.x = element_text(size = font_size),
+          axis.title.y = element_text(size = font_size),
+          axis.text.x = element_text(size = font_size),
+          axis.text.y = element_text(size = font_size),
           axis.line = element_line(colour = "black", size = 0.5, linetype = "solid"),
+          text = element_text(size = font_size, family = "sans"),
           panel.background = element_blank(),
           panel.border = element_blank(),
           strip.text = element_text(size = 16),
@@ -858,16 +914,18 @@ co2_seq_figure_fun  <- function(region_name, lower_l, upper_l, lower_b, upper_b)
 
 
 ## Make figures
-US_co2_seq_figure <- co2_seq_figure_fun(region_name = 'US', lower_l = 0, upper_l = 4, lower_b = 0, upper_b = 4)
-CN_co2_seq_figure <- co2_seq_figure_fun(region_name = 'China', lower_l = 0, upper_l = 4, lower_b = 0, upper_b = 4)
-RU_co2_seq_figure <- co2_seq_figure_fun(region_name = 'Russia', lower_l = 0, upper_l = 4, lower_b = 0, upper_b = 4)
-EU_co2_seq_figure <- co2_seq_figure_fun(region_name = 'Western_EU', lower_l = 0, upper_l = 4, lower_b = 0, upper_b = 4)
-GL_co2_seq_figure <- co2_seq_figure_fun(region_name = 'World', lower_l = 0, upper_l = 41, lower_b = 0, upper_b = 40)
+US_co2_seq_figure <- co2_seq_figure_fun(region_name = 'US', title_name = 'a. United States', lower_l = 0, upper_l = 4, lower_b = 0, upper_b = 4)
+CN_co2_seq_figure <- co2_seq_figure_fun(region_name = 'China', title_name = 'b. China', lower_l = 0, upper_l = 4, lower_b = 0, upper_b = 4)
+RU_co2_seq_figure <- co2_seq_figure_fun(region_name = 'Russia', title_name = 'c. Russia', lower_l = 0, upper_l = 4, lower_b = 0, upper_b = 4)
+EU_co2_seq_figure <- co2_seq_figure_fun(region_name = 'Western_EU', title_name = 'd. Western Europe', lower_l = 0, upper_l = 4, lower_b = 0, upper_b = 4)
+GL_co2_seq_figure <- co2_seq_figure_fun(region_name = 'World', title_name = 'e. World', lower_l = 0, upper_l = 41, lower_b = 0, upper_b = 40)
 
 
-plot_grid(US_co2_seq_figure, CN_co2_seq_figure, ncol=1, align="v")  
-plot_grid(RU_co2_seq_figure, EU_co2_seq_figure, ncol=1, align="v")
-plot_grid(GL_co2_seq_figure, GL_co2_seq_figure, ncol=1, align="v")  
+plot_grid(US_co2_seq_figure, CN_co2_seq_figure, RU_co2_seq_figure, EU_co2_seq_figure, GL_co2_seq_figure, ncol=1, align="v") 
+
+#plot_grid(US_co2_seq_figure, CN_co2_seq_figure, ncol=1, align="v")  
+#plot_grid(RU_co2_seq_figure, EU_co2_seq_figure, ncol=1, align="v")
+#plot_grid(GL_co2_seq_figure, GL_co2_seq_figure, ncol=1, align="v")  
 
 
 

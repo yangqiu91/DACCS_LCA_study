@@ -90,9 +90,9 @@ Elec_impact_US_RCP19_noDAC <- read_excel("C:/Users/yqiu/Box/DAC LCA-IAM/YQ_work/
 Elec_impact_US_RCP19 <- read_excel("C:/Users/YQIU/Box/DAC LCA-IAM/YQ_work/result/Electricity_environmental_impact/US_hv_RCP19.xlsx")
 
 ###############################################
-unique(Elec_impact_US_baseline$tech)
-unique(Elec_impact_US_RCP19_noDAC$tech)
-unique(Elec_impact_US_RCP19$tech)
+#unique(Elec_impact_US_baseline$tech)
+#unique(Elec_impact_US_RCP19_noDAC$tech)
+#unique(Elec_impact_US_RCP19$tech)
 
 
 
@@ -215,61 +215,62 @@ transmission <- c("market for transmission network, electricity, high voltage",
                   "market for transmission network, long-distance")
 
 
-eco_color_scheme = c('electricity production, hard coal' = 'black',
-                     'electricity production, lignite' = 'black',
-                     'Electricity, at power plant/hard coal, IGCC, no CCS/2025' = 'black',
-                     'Electricity, at power plant/lignite, IGCC, no CCS/2025' = 'black',
-                     'heat and power co-generation, hard coal' = 'black',
-                     "heat and power co-generation, lignite" = 'black',
+eco_color_scheme = c('electricity production, hard coal' = rgb(0/256, 0/256, 0/256),
+                     'electricity production, lignite' = rgb(0/256, 0/256, 0/256),
+                     'Electricity, at power plant/hard coal, IGCC, no CCS/2025' = rgb(0/256, 0/256, 0/256),
+                     'Electricity, at power plant/lignite, IGCC, no CCS/2025' = rgb(0/256, 0/256, 0/256),
+                     'heat and power co-generation, hard coal' = rgb(0/256, 0/256, 0/256),
+                     "heat and power co-generation, lignite" = rgb(0/256, 0/256, 0/256),
                      
-                     'electricity production, hard coal with CCS' = 'gray30',
-                     'electricity production, lignite with CCS' = 'gray30',
+                     'electricity production, hard coal with CCS' = rgb(82/256, 82/256, 82/256),
+                     'electricity production, lignite with CCS' = rgb(82/256, 82/256, 82/256),
                      
-                     'electricity production, natural gas, combined cycle power plant' = 'grey50',
-                     'electricity production, natural gas, conventional power plant' = 'grey50',
-                     'heat and power co-generation, natural gas, conventional power plant, 100MW electrical' = 'grey50',
-                     'heat and power co-generation, natural gas, combined cycle power plant, 400MW electrical' = 'grey50',
+                     'electricity production, natural gas, combined cycle power plant' = rgb(115/256, 115/256, 115/256),
+                     'electricity production, natural gas, conventional power plant' = rgb(115/256, 115/256, 115/256),
+                     'heat and power co-generation, natural gas, conventional power plant, 100MW electrical' = rgb(115/256, 115/256, 115/256),
+                     'heat and power co-generation, natural gas, combined cycle power plant, 400MW electrical' = rgb(115/256, 115/256, 115/256),
                      
-                     'electricity production, natural gas with CCS' = "gray80",
+                     'electricity production, natural gas with CCS' = rgb(189/256, 189/256, 189/256),
                      
-                     'electricity production, oil' = "brown3",
-                     'heat and power co-generation, oil' = "brown3",
+                     'electricity production, oil' = rgb(130/256, 0/256, 0/256),
+                     'heat and power co-generation, oil' = rgb(130/256, 0/256, 0/256),
                      
-                     'electricity production, nuclear, boiling water reactor' = 'cyan',
-                     'electricity production, nuclear, pressure water reactor' = 'cyan',
-                     'electricity production, nuclear, pressure water reactor, heavy water moderated' = 'cyan',
+                     'electricity production, nuclear, boiling water reactor' = rgb(8/256, 48/256, 107/256), 
+                     'electricity production, nuclear, pressure water reactor' = rgb(8/256, 48/256, 107/256), 
+                     'electricity production, nuclear, pressure water reactor, heavy water moderated' = rgb(8/256, 48/256, 107/256), 
                      
-                     'electricity production, hydro, run-of-river' = rgb(170/256, 255/256, 195/256), 
-                     "electricity production, hydro, reservoir, alpine region" = rgb(170/256, 255/256, 195/256), 
-                     'electricity production, hydro, reservoir, non-alpine region' = rgb(170/256, 255/256, 195/256), 
+                     'electricity production, hydro, run-of-river' = rgb(33/256, 113/256, 181/256),
+                     "electricity production, hydro, reservoir, alpine region" = rgb(33/256, 113/256, 181/256),
+                     'electricity production, hydro, reservoir, non-alpine region' = rgb(33/256, 113/256, 181/256),
                      
-                     'electricity production, wind, 1-3MW turbine, onshore' = 'blue', 
-                     'electricity production, wind, <1MW turbine, onshore' = 'blue', 
-                     'electricity production, wind, >3MW turbine, onshore' = 'blue', 
-                     'electricity production, wind, 1-3MW turbine, offshore' = 'blue', 
+                     'electricity production, wind, 1-3MW turbine, onshore' = rgb(0/256, 182/256, 239/256),  
+                     'electricity production, wind, <1MW turbine, onshore' = rgb(0/256, 182/256, 239/256),  
+                     'electricity production, wind, >3MW turbine, onshore' = rgb(0/256, 182/256, 239/256),  
+                     'electricity production, wind, 1-3MW turbine, offshore' = rgb(0/256, 182/256, 239/256),  
                      
-                     'electricity production, solar thermal parabolic trough, 50 MW' = 'yellow',
-                     'electricity production, solar tower power plant, 20 MW' = 'yellow',
-                     'electricity production, photovoltaic, 3kWp slanted-roof installation, multi-Si, panel, mounted' = 'yellow',
-                     'electricity production, photovoltaic, 570kWp open ground installation, multi-Si' = 'yellow',
+                     'electricity production, solar thermal parabolic trough, 50 MW' = rgb(255/256, 204/256, 0/256),
+                     'electricity production, solar tower power plant, 20 MW' = rgb(255/256, 204/256, 0/256),
+                     'electricity production, photovoltaic, 3kWp slanted-roof installation, multi-Si, panel, mounted' = rgb(255/256, 204/256, 0/256),
+                     'electricity production, photovoltaic, 570kWp open ground installation, multi-Si' = rgb(255/256, 204/256, 0/256),
                      
-                     'electricity production, wood, future' = 'green3',
-                     "Electricity, at BIGCC power plant 450MW, no CCS/2025" = 'green3',
-                     'heat and power co-generation, biogas, gas engine' = 'green3',
-                     'heat and power co-generation, wood chips, 6667 kW' = 'green3',
-                     'heat and power co-generation, wood chips, 6667 kW, state-of-the-art 2014' = 'green3',
+                     'electricity production, wood, future' = rgb(0/256, 109/256, 44/256), 
+                     "Electricity, at BIGCC power plant 450MW, no CCS/2025" = rgb(0/256, 109/256, 44/256), 
+                     'heat and power co-generation, biogas, gas engine' = rgb(0/256, 109/256, 44/256), 
+                     'heat and power co-generation, wood chips, 6667 kW' = rgb(0/256, 109/256, 44/256), 
+                     'heat and power co-generation, wood chips, 6667 kW, state-of-the-art 2014' = rgb(0/256, 109/256, 44/256), 
                      
-                     'Electricity, at BIGCC power plant 450MW, pre, pipeline 200km, storage 1000m/2025, US' = 'green',
-                     'electricity production, biomass with CCS' = 'green',
+                     'Electricity, at BIGCC power plant 450MW, pre, pipeline 200km, storage 1000m/2025, US' = rgb(106/256, 169/256, 118/256), 
+                     'electricity production, biomass with CCS' = rgb(106/256, 169/256, 118/256), 
                      
-                     'electricity production, wave' = 'red',
-                     'electricity production, deep geothermal' = 'red',
+                     'electricity production, wave' = rgb(252/256, 118/256, 26/256),  
+                     'electricity production, deep geothermal' = rgb(252/256, 118/256, 26/256),  
                      
                      #"market for electricity, high voltage" = rgb(25/256, 58/256, 113/256),                                                          
-                     "market for transmission network, electricity, high voltage" = rgb(25/256, 58/256, 113/256),                                    
-                     "market for transmission network, long-distance" = rgb(25/256, 58/256, 113/256))
+                     #"market for transmission network, electricity, high voltage" = rgb(25/256, 58/256, 113/256),                                    
+                     #"market for transmission network, long-distance" = rgb(25/256, 58/256, 113/256)
+                     )
 
-
+font_size = 12
 ###############################################
 
 
@@ -393,12 +394,12 @@ for (i in 1:nrow(Side_bar_data_overall_1)) {
 
 
 ## Figure function
-Impact_figure_function <- function(region_abb, impact_name, m_lowerbound, m_upperbound, low_break, upp_break){
+Impact_figure_function <- function(region_abb, impact_name, m_lowerbound, m_upperbound, low_break, upp_break, title_name_set, y_axis_name_set){
   
-  DAC_type_color_scheme <- c("Solvent_NG"  = '#87cefa', 
-                    "Solvent_BG" = '#1c86ee',
-                    "Sorbent_HP" = 'orange', 
-                    "Sorbent_BG"  = 'red')
+  DAC_type_color_scheme <- c("Solvent_NG"  = rgb(0/256, 182/256, 239/256),  
+                    "Solvent_BG" = rgb(8/256, 48/256, 107/256),
+                    "Sorbent_HP" = rgb(255/256, 204/256, 0/256),
+                    "Sorbent_BG"  = rgb(252/256, 118/256, 26/256))
   
   #region_abb = 'US'
   #impact_name = 'Climate change (kg CO2-Eq)'
@@ -414,38 +415,44 @@ Impact_figure_function <- function(region_abb, impact_name, m_lowerbound, m_uppe
   side_figure_data <- Side_bar_data_overall_1 %>% 
     filter(region == region_abb & impact_category == impact_name)
   
-
+  title_name = title_name_set
+  y_axis_name = y_axis_name_set
   
   main_figure <- ggplot(main_figure_data) +
-    geom_line(aes(x = year, y = Baseline, group = tech_heat, color = tech_heat), linetype = "solid", size = 1.2) +
-    geom_line(aes(x = year, y = RCP19_DAC, group = tech_heat, color = tech_heat), linetype = "dotted", size = 1.2) +
+    geom_line(aes(x = year, y = Baseline, group = tech_heat, color = tech_heat), linetype = "solid", size = 1) +
+    geom_line(aes(x = year, y = RCP19_DAC, group = tech_heat, color = tech_heat), linetype = "dotted", size = 1) +
     #geom_line(aes(x = year, y = RCP19_DAC_LR, group = tech_heat, color = tech_heat), linetype = "dotted", size = 1.1) +
-    theme(axis.title.x = element_blank(),
-          axis.title.y = element_blank(),
-          axis.text.x = element_text(size = 20,angle = 45, vjust = 0.6, hjust=0.7),
-          axis.text.y = element_text(size = 20),
-          axis.ticks.x = element_blank(),
+    labs(title = title_name, x = "Year", y = y_axis_name) +
+    theme(plot.title = element_text(size = font_size),
+          axis.title.x = element_blank(),
+          axis.title.y = element_text(size = font_size),
+          axis.text.x = element_text(size = font_size),
+          axis.text.y = element_text(size = font_size),
+          #axis.text.x = element_text(size = 20,angle = 45, vjust = 0.6, hjust=0.7),
+          #axis.text.y = element_text(size = 20),
+
           axis.line = element_line(colour = "black", size = 0.5),
           strip.text = element_text(size = 16),
           strip.background = element_blank(),
-          legend.text = element_text(size = 18, face = "bold"),
-          legend.title = element_blank(),
+          # = element_text(size = 18, face = "bold"),
+          #legend.title = element_blank(),
           legend.position="none",
-          legend.spacing.x = unit(0.3, 'cm'),
-          legend.spacing.y = unit(0.3, 'cm'),
-          plot.margin = margin(t = 0.5, r = 0.14, b = 0.9, l = 0.15, "cm"),
-          plot.title = element_blank(),
+          #legend.spacing.x = unit(0.3, 'cm'),
+          #legend.spacing.y = unit(0.3, 'cm'),
+          plot.margin = margin(t = 0.25, r = 0.15, b = 0.25, l = 0.25, "cm"),
+
           panel.border = element_rect(colour = "black", fill=NA, size=0.5),
           panel.background = element_blank(),
-          panel.spacing.x = unit(1, 'cm')) +
-    scale_y_continuous(limits = c(m_lowerbound, m_upperbound), breaks = c(seq(low_break, upp_break, (upp_break - low_break)/4)), name = "Value") +
+          #panel.spacing.x = unit(1, 'cm')
+          ) +
+    scale_y_continuous(limits = c(m_lowerbound, m_upperbound), breaks = c(seq(low_break, upp_break, (upp_break - low_break)/4))) +
     scale_color_manual(values=DAC_type_color_scheme)
   
   
   
   side_figure <- ggplot() +
     geom_bar(data = side_figure_data %>% filter(scenario == 'SSP2_RCP19_DAC'),
-             aes(x = tech_heat_num - 0.2, y = impact_change, color = tech_heat), fill = 'white', stat = "identity", width = 0.32, size = 1) + 
+             aes(x = tech_heat_num - 0.2, y = impact_change, color = tech_heat), fill = 'white', stat = "identity", width = 0.32, size = 0.5) + 
     geom_bar(data = side_figure_data %>% filter(scenario == 'SSP2_RCP19_DAC_L'),
              aes(x = tech_heat_num + 0.2, y = impact_change, color = tech_heat, fill = tech_heat), stat = "identity", width = 0.32, size = 0.5) + 
     
@@ -453,9 +460,12 @@ Impact_figure_function <- function(region_abb, impact_name, m_lowerbound, m_uppe
                   aes(x = tech_heat_num + 0.2, ymin=lower_error, ymax=upper_error), width=.3,position=position_dodge(0.8)) +
     geom_hline(yintercept = 0, linetype = "dashed", color = "black", size = 0.7) +
     theme(axis.title.x = element_blank(),
-          axis.title.y = element_blank(),
-          axis.text.x = element_text(size = 20, angle = 90, hjust = 0.5, vjust = 0.5),
-          axis.text.y = element_text(size = 20),
+          axis.title.y = element_text(size = font_size),
+          axis.text.x = element_text(size = font_size, angle = 90, hjust = 0.5, vjust = 0.5),
+          axis.text.y = element_text(size = font_size),
+          
+          #axis.text.x = element_text(size = 20, angle = 90, hjust = 0.5, vjust = 0.5),
+          #axis.text.y = element_text(size = 20),
           axis.ticks.x = element_blank(),
           axis.line = element_line(colour = "black", size = 0.5),
           
@@ -464,44 +474,141 @@ Impact_figure_function <- function(region_abb, impact_name, m_lowerbound, m_uppe
           legend.position="none",
           legend.spacing.x = unit(0.3, 'cm'),
           legend.spacing.y = unit(0.3, 'cm'),
-          plot.margin = margin(t = 0.5, r = 4.5, b = 0.9, l = 0.1, "cm"),
+          plot.margin = margin(t = 0.25, r = 0.25, b = 0.25, l = 0.15, "cm"),
           plot.title = element_blank(),
           panel.border = element_rect(colour = "black", fill=NA, size=0.5),
           panel.background = element_blank(),
           panel.spacing.x = unit(1, 'cm')) +
     scale_x_continuous(breaks = c(1, 2, 3, 4), label = c("SV+BM", "SV+NG", "SB+BM", "SB+HP")) +
-    scale_y_continuous(limits = c(-1, 1), breaks = c(-1, -0.5, 0, 0.5, 1), name = "Value", position = 'right', labels = scales::percent) +
+    scale_y_continuous(limits = c(-1, 1), breaks = c(-1, -0.5, 0, 0.5, 1), name = "Change of impact (%)", position = 'right', labels = scales::percent) +
     scale_color_manual(values = DAC_type_color_scheme) + 
     scale_fill_manual(values = DAC_type_color_scheme)
 
-  aggregated_figure <- plot_grid(main_figure,  side_figure, ncol=2, align="h")  
+  aggregated_figure <- plot_grid(main_figure,  side_figure, ncol=2, align="h", rel_widths = c(2, 1.2))  
   
   aggregated_figure
   }
 
+Impact_figure_function_Climate_change <- function(region_abb, impact_name, m_lowerbound, m_upperbound, low_break, upp_break, title_name_set, y_axis_name_set){
+  
+  DAC_type_color_scheme <- c("Solvent_NG"  = rgb(0/256, 182/256, 239/256),  
+                             "Solvent_BG" = rgb(8/256, 48/256, 107/256),
+                             "Sorbent_HP" = rgb(255/256, 204/256, 0/256),
+                             "Sorbent_BG"  = rgb(252/256, 118/256, 26/256))
+  
+  #region_abb = 'US'
+  #impact_name = 'Climate change (kg CO2-Eq)'
+  #m_lowerbound = -1280
+  #m_upperbound = 0
+  #low_break = -1200
+  #upp_break = 0
+  
+  
+  main_figure_data <- Main_DAC_data_together %>% 
+    filter(region == region_abb & impact_category == impact_name)
+  
+  side_figure_data <- Side_bar_data_overall_1 %>% 
+    filter(region == region_abb & impact_category == impact_name)
+  
+  title_name = title_name_set
+  y_axis_name = y_axis_name_set
+  
+  main_figure <- ggplot(main_figure_data) +
+    geom_line(aes(x = year, y = Baseline, group = tech_heat, color = tech_heat), linetype = "solid", size = 1) +
+    geom_line(aes(x = year, y = RCP19_DAC, group = tech_heat, color = tech_heat), linetype = "dotted", size = 1) +
+    #geom_line(aes(x = year, y = RCP19_DAC_LR, group = tech_heat, color = tech_heat), linetype = "dotted", size = 1.1) +
+    labs(title = title_name, x = "Year", y = y_axis_name) +
+    theme(plot.title = element_text(size = font_size),
+          axis.title.x = element_blank(),
+          axis.title.y = element_text(size = font_size),
+          axis.text.x = element_text(size = font_size),
+          axis.text.y = element_text(size = font_size),
+          #axis.text.x = element_text(size = 20,angle = 45, vjust = 0.6, hjust=0.7),
+          #axis.text.y = element_text(size = 20),
+          
+          axis.line = element_line(colour = "black", size = 0.5),
+          strip.text = element_text(size = 16),
+          strip.background = element_blank(),
+          # = element_text(size = 18, face = "bold"),
+          #legend.title = element_blank(),
+          legend.position="none",
+          #legend.spacing.x = unit(0.3, 'cm'),
+          #legend.spacing.y = unit(0.3, 'cm'),
+          plot.margin = margin(t = 0.25, r = 0.15, b = 0.25, l = 0.25, "cm"),
+          
+          panel.border = element_rect(colour = "black", fill=NA, size=0.5),
+          panel.background = element_blank(),
+          #panel.spacing.x = unit(1, 'cm')
+    ) +
+    scale_y_continuous(limits = c(m_lowerbound, m_upperbound), breaks = c(seq(low_break, upp_break, (upp_break - low_break)/4))) +
+    scale_color_manual(values=DAC_type_color_scheme)
+  
+  
+  
+  side_figure <- ggplot() +
+    geom_bar(data = side_figure_data %>% filter(scenario == 'SSP2_RCP19_DAC'),
+             aes(x = tech_heat_num - 0.2, y = impact_change, color = tech_heat), fill = 'white', stat = "identity", width = 0.32, size = 0.5) + 
+    geom_bar(data = side_figure_data %>% filter(scenario == 'SSP2_RCP19_DAC_L'),
+             aes(x = tech_heat_num + 0.2, y = impact_change, color = tech_heat, fill = tech_heat), stat = "identity", width = 0.32, size = 0.5) + 
+    
+    geom_errorbar(data = side_figure_data %>% filter(scenario == 'SSP2_RCP19_DAC_L'),
+                  aes(x = tech_heat_num + 0.2, ymin=lower_error, ymax=upper_error), width=.3,position=position_dodge(0.8)) +
+    geom_hline(yintercept = 0, linetype = "dashed", color = "black", size = 0.7) +
+    theme(axis.title.x = element_blank(),
+          axis.title.y = element_text(size = font_size),
+          axis.text.x = element_text(size = font_size, angle = 90, hjust = 0.5, vjust = 0.5),
+          axis.text.y = element_text(size = font_size),
+          
+          #axis.text.x = element_text(size = 20, angle = 90, hjust = 0.5, vjust = 0.5),
+          #axis.text.y = element_text(size = 20),
+          axis.ticks.x = element_blank(),
+          axis.line = element_line(colour = "black", size = 0.5),
+          
+          legend.text = element_text(size = 18, face = "bold"),
+          legend.title = element_blank(),
+          legend.position="none",
+          legend.spacing.x = unit(0.3, 'cm'),
+          legend.spacing.y = unit(0.3, 'cm'),
+          plot.margin = margin(t = 0.25, r = 0.25, b = 0.25, l = 0.15, "cm"),
+          plot.title = element_blank(),
+          panel.border = element_rect(colour = "black", fill=NA, size=0.5),
+          panel.background = element_blank(),
+          panel.spacing.x = unit(1, 'cm')) +
+    scale_x_continuous(breaks = c(1, 2, 3, 4), label = c("SV+BM", "SV+NG", "SB+BM", "SB+HP")) +
+    scale_y_continuous(limits = c(-2, 1), breaks = c(-2, -1, 0, 1), name = "Change of impact (%)", position = 'right', labels = scales::percent) +
+    scale_color_manual(values = DAC_type_color_scheme) + 
+    scale_fill_manual(values = DAC_type_color_scheme)
+  
+  aggregated_figure <- plot_grid(main_figure,  side_figure, ncol=2, align="h", rel_widths = c(2, 1.2))  
+  
+  aggregated_figure
+}
 
-US_cli_chan_figure <- Impact_figure_function (region_abb = "US", impact_name = "Climate change (kg CO2-Eq)", m_lowerbound = -1280, m_upperbound = 0, low_break = -1200, upp_break = 0)
+#US_cli_chan_figure <- Impact_figure_function (region_abb = "US", impact_name = "Climate change (kg CO2-Eq)", m_lowerbound = -1280, m_upperbound = 0, low_break = -1200, upp_break = 0, title_name_set = 'a. Climate Change Impact', y_axis_name_set = expression('kg CO'[2]*'-Eq')) 
 
-US_cli_chan_figure
+#US_cli_chan_figure
 
 
 ##Making figures
-US_cli_chan_figure <- Impact_figure_function (region_abb = "US", impact_name = "Climate change (kg CO2-Eq)", m_lowerbound = -1280, m_upperbound = 0, low_break = -1200, upp_break = 0)
-US_fre_eutr_figure <- Impact_figure_function (region_abb = "US", impact_name = "Freshwater eutrophication (kg P-Eq)", m_lowerbound = 0, m_upperbound = 0.8, low_break = 0, upp_break = 0.8)
-US_fre_ecot_figure <- Impact_figure_function (region_abb = "US", impact_name = "Freshwater ecotoxicity (kg 14-DCB)", m_lowerbound = 0, m_upperbound = 36, low_break = 0, upp_break = 36)
-US_ter_acid_figure <- Impact_figure_function (region_abb = "US", impact_name = "Terrestrial acidification (kg SO2-Eq)", m_lowerbound = 0, m_upperbound = 2, low_break = 0, upp_break = 2)
-US_ter_ecot_figure <- Impact_figure_function (region_abb = "US", impact_name = "Terrestrial ecotoxicity (kg 14-DCB)", m_lowerbound = 0, m_upperbound = 0.16, low_break = 0, upp_break = 0.16)
-US_hum_toxi_figure <- Impact_figure_function (region_abb = "US", impact_name = "Human toxicity (kg 14-DCB)", m_lowerbound = 0, m_upperbound = 440, low_break = 0, upp_break = 440)
-US_met_depl_figure <- Impact_figure_function (region_abb = "US", impact_name = "Metal depletion (kg Fe-Eq)", m_lowerbound = 0, m_upperbound = 52, low_break = 0, upp_break = 52)
-US_wat_delp_figure <- Impact_figure_function (region_abb = "US", impact_name = "Water depletion (m3 water)", m_lowerbound = 0, m_upperbound = 12, low_break = 0, upp_break = 12)
+US_cli_chan_figure <- Impact_figure_function_Climate_change (region_abb = "US", impact_name = "Climate change (kg CO2-Eq)", m_lowerbound = -1280, m_upperbound = 0, low_break = -1200, upp_break = 0, title_name_set = 'a. Climate Change Impact', y_axis_name_set = expression('kg CO'[2]*'-Eq'))
+US_hum_toxi_figure <- Impact_figure_function (region_abb = "US", impact_name = "Human toxicity (kg 14-DCB)", m_lowerbound = 0, m_upperbound = 440, low_break = 0, upp_break = 440, title_name_set = 'b. Human Toxicity Impact', y_axis_name_set = 'kg 14-DCB')
+US_fre_eutr_figure <- Impact_figure_function (region_abb = "US", impact_name = "Freshwater eutrophication (kg P-Eq)", m_lowerbound = 0, m_upperbound = 0.8, low_break = 0, upp_break = 0.8, title_name_set = 'c. Freshwater Eutrophication Impact', y_axis_name_set = 'kg P-Eq')
+US_fre_ecot_figure <- Impact_figure_function (region_abb = "US", impact_name = "Freshwater ecotoxicity (kg 14-DCB)", m_lowerbound = 0, m_upperbound = 36, low_break = 0, upp_break = 36, title_name_set = 'd. Freshwater Ecotoxicity Impact', y_axis_name_set = 'kg 14-DCB')
+US_ter_acid_figure <- Impact_figure_function (region_abb = "US", impact_name = "Terrestrial acidification (kg SO2-Eq)", m_lowerbound = 0, m_upperbound = 2, low_break = 0, upp_break = 2, title_name_set = 'e. Terrestrial Acidification Impact', y_axis_name_set = expression('kg SO'[2]*'-Eq'))
+US_ter_ecot_figure <- Impact_figure_function (region_abb = "US", impact_name = "Terrestrial ecotoxicity (kg 14-DCB)", m_lowerbound = 0, m_upperbound = 0.16, low_break = 0, upp_break = 0.16, title_name_set = 'f. Terrestrial Ecotoxicity Impact', y_axis_name_set = 'kg 14-DCB')
+US_met_depl_figure <- Impact_figure_function (region_abb = "US", impact_name = "Metal depletion (kg Fe-Eq)", m_lowerbound = 0, m_upperbound = 52, low_break = 0, upp_break = 52, title_name_set = 'g. Metal Depletion', y_axis_name_set = 'kg Fe-Eq')
+US_wat_delp_figure <- Impact_figure_function (region_abb = "US", impact_name = "Water depletion (m3 water)", m_lowerbound = 0, m_upperbound = 12, low_break = 0, upp_break = 12, title_name_set = 'h. Water Depletion', y_axis_name_set = expression('m'^3*'water'))
 
+
+#plot_grid(US_cli_chan_figure, US_hum_toxi_figure, US_fre_eutr_figure, US_fre_ecot_figure, 
+#          ncol=2, align="v") 
+
+#plot_grid(US_ter_acid_figure, US_ter_ecot_figure, US_met_depl_figure, US_wat_delp_figure, 
+#          ncol=2, align="h")  
 
 plot_grid(US_cli_chan_figure, US_hum_toxi_figure, US_fre_eutr_figure, US_fre_ecot_figure, 
-          ncol=2, align="h") 
-
-plot_grid(US_ter_acid_figure, US_ter_ecot_figure, US_met_depl_figure, US_wat_delp_figure, 
-          ncol=2, align="h")  
-
+          US_ter_acid_figure, US_ter_ecot_figure, US_met_depl_figure, US_wat_delp_figure, 
+          ncol=2, align="v") 
 
 
 ## exporting the data to excel sheet
@@ -541,7 +648,7 @@ side_figure_result_for_writing <- Side_bar_data_overall_1 %>%
 
 
 
-## Figure 3b -- LCA result of electricity generation
+## Figure 4 -- LCA result of electricity generation
 ###############################################
 
 ## Data wrangling
@@ -578,25 +685,30 @@ Kwh_elec_impact_US_DAC_diff_change_scenario$impact_category <- factor(Kwh_elec_i
 
 
 ## Figure function
-Elec_impact_change_fig_fun <- function(impact_name, scale, m_upperbound, m_lowerbound) {
+Elec_impact_change_fig_fun <- function(impact_name, scale, u_limit, l_limit,  m_upperbound, m_lowerbound, title_name_set, y_axis_name_set) {
   
   Impact_diff <- Kwh_elec_impact_US_DAC_diff_change_scenario %>% filter(impact_category == impact_name)
   Impact_time_change <- Kwh_elec_impact_US_DAC_per_change_2020 %>% filter(impact_category == impact_name)
   
   scale_num = scale
+  title_name = title_name_set
+  y_axis_name = y_axis_name_set
   
   elec_impact_change_figure <- ggplot() + 
     #geom_point(data = Kwh_elec_impact_US_DAC_per_change, aes(x = year, y = value, group = Climate_scenario, color = Climate_scenario), size = 2.6) + 
     
-    geom_bar(data = Impact_diff, aes(x = year, y = kwh_elec_impact_DAC_diff), fill = "tan1", stat="identity") +
+    geom_bar(data = Impact_diff, aes(x = year, y = kwh_elec_impact_DAC_diff), fill = rgb(189/256, 189/256, 189/256), stat="identity") +
     geom_line(data = Impact_time_change, aes(x = year, y = rela_change_2020/scale_num, group = Climate_scenario, color = Climate_scenario), size = 1.3) + 
     geom_hline(yintercept = 0, color = "black", linetype='dashed',  size = 0.5) +
-    theme(plot.margin = margin(1.3, 2, 0.1, 0.1, "cm"),
-          axis.title.x = element_blank(),
-          axis.title.y = element_blank(),
-          axis.text.x = element_text(size = 16),
-          axis.text.y = element_text(size = 16),
+    labs(title = title_name, x = "Year") +
+    theme(plot.margin = margin(0.2, 0.5, 0.2, 0.1, "cm"),
+          plot.title = element_text(size = font_size),
+          axis.title.x = element_text(size = font_size),
+          axis.title.y = element_text(size = font_size),
+          axis.text.x = element_text(size = font_size),
+          axis.text.y = element_text(size = font_size),
           axis.line = element_line(colour = "black", size = 0.5, linetype = "solid"),
+          text = element_text(size = font_size, family = "sans"),
           panel.background = element_blank(),
           panel.border = element_blank(),
           strip.text = element_blank(),
@@ -613,23 +725,23 @@ Elec_impact_change_fig_fun <- function(impact_name, scale, m_upperbound, m_lower
     
     scale_x_discrete(breaks=c(2020, 2040, 2060, 2080, 2100)) +
     scale_color_manual(name = "Climate scenario", 
-                       values = c(RCP19 = 'red', RCP19_DAC = 'blue')) +
-    scale_y_continuous(limits = c(m_lowerbound, m_upperbound), breaks = c(seq(m_lowerbound, m_upperbound, (m_upperbound - m_lowerbound)/4)), name = "Value",
-                       sec.axis = sec_axis(~.*scale_num, name="Second Axis", breaks = c(-1.6, -0.8, 0, 0.8, 1.6), labels = scales::percent))
+                       values = c(RCP19 = rgb(252/256, 118/256, 26/256), RCP19_DAC = rgb(8/256, 48/256, 107/256))) +
+    scale_y_continuous(limits = c(l_limit, u_limit), breaks = c(seq(m_lowerbound, m_upperbound, (m_upperbound - m_lowerbound)/4)), name = y_axis_name,
+                       sec.axis = sec_axis(~.*scale_num, breaks = c(-1.6, -0.8, 0, 0.8, 1.6), labels = scales::percent))
   
   elec_impact_change_figure
 }
 
 
 ## Making figures
-elec_impact_change_figure_CCI <- Elec_impact_change_fig_fun('Climate change (kg CO2-Eq)', 75, 0.02, -0.02)
-elec_impact_change_figure_HTI<- Elec_impact_change_fig_fun("Human toxicity (kg 14-DCB)", 250, 0.006, -0.006)
-elec_impact_change_figure_FEI <- Elec_impact_change_fig_fun("Freshwater eutrophication (kg P-Eq)", 400000, 4e-6, -4e-6)
-elec_impact_change_figure_FTI <- Elec_impact_change_fig_fun("Freshwater ecotoxicity (kg 14-DCB)", 1900, 8e-4, -8e-4)
-elec_impact_change_figure_TAI <- Elec_impact_change_fig_fun("Terrestrial acidification (kg SO2-Eq)", 80000, 2e-5, -2e-5)
-elec_impact_change_figure_TTI <- Elec_impact_change_fig_fun('Terrestrial ecotoxicity (kg 14-DCB)', 400000, 4e-6, -4e-6)
-elec_impact_change_figure_MD <- Elec_impact_change_fig_fun("Metal depletion (kg Fe-Eq)", 850, 2e-3, -2e-3)
-elec_impact_change_figure_WD <- Elec_impact_change_fig_fun("Water depletion (m3 water)", 16000, 1e-4, -1e-4)
+elec_impact_change_figure_CCI <- Elec_impact_change_fig_fun('Climate change (kg CO2-Eq)', 75, 0.02, -0.02 , 0.02, -0.02, title_name_set = 'a. Climate Change Impact', y_axis_name_set = expression('kg CO'[2]*'-Eq/kWh'))
+elec_impact_change_figure_HTI<- Elec_impact_change_fig_fun("Human toxicity (kg 14-DCB)", 250, 0.0061, -0.0061, 0.0060, -0.0060, title_name_set = 'b. Human Toxicity Impact', y_axis_name_set = 'kg 14-DCB/kWh')
+elec_impact_change_figure_FEI <- Elec_impact_change_fig_fun("Freshwater eutrophication (kg P-Eq)", 400000, 4e-6, -4e-6 , 4e-6, -4e-6, title_name_set = 'c. Freshwater Eutrophication Impact', y_axis_name_set = 'kg P-Eq/kWh')
+elec_impact_change_figure_FTI <- Elec_impact_change_fig_fun("Freshwater ecotoxicity (kg 14-DCB)", 1900, 8e-4, -8e-4 , 8e-4, -8e-4, title_name_set = 'd. Freshwater Ecotoxicity Impact', y_axis_name_set = 'kg 14-DCB/kWh')
+elec_impact_change_figure_TAI <- Elec_impact_change_fig_fun("Terrestrial acidification (kg SO2-Eq)", 80000, 2e-5, -2e-5 , 2e-5, -2e-5, title_name_set = 'e. Terrestrial Acidification Impact', y_axis_name_set = expression('kg SO'[2]*'-Eq/kWh'))
+elec_impact_change_figure_TTI <- Elec_impact_change_fig_fun('Terrestrial ecotoxicity (kg 14-DCB)', 400000, 4e-6, -4e-6 , 4e-6, -4e-6, title_name_set = 'f. Terrestrial Ecotoxicity Impact', y_axis_name_set = 'kg 14-DCB/kWh')
+elec_impact_change_figure_MD <- Elec_impact_change_fig_fun("Metal depletion (kg Fe-Eq)", 850, 2e-3, -2e-3 , 2e-3, -2e-3, title_name_set = 'g. Metal Depletion', y_axis_name_set = 'kg Fe-Eq/kWh')
+elec_impact_change_figure_WD <- Elec_impact_change_fig_fun("Water depletion (m3 water)", 16000, 1e-4, -1e-4 , 1e-4, -1e-4, title_name_set = 'h. Water Depletion', y_axis_name_set = expression('m'^3*'water/kWh'))
 
 
 plot_grid(elec_impact_change_figure_CCI, elec_impact_change_figure_HTI, elec_impact_change_figure_FEI, elec_impact_change_figure_FTI, 
@@ -647,13 +759,63 @@ writeWorksheetToFile("C:/Users/yqiu/Box/DAC LCA-IAM/YQ_work/result/LCA_result/Fi
                      data = Kwh_elec_impact_US_DAC_per_change_2020, sheet = "Figure_3b_line")
 
 
+# Additional code for making a figure for presentation slides
+
+Kwh_elec_impact_US_DAC_absolute_change <- Kwh_elec_impact_US %>% 
+  gather(key = 'impact_category', value = 'value', 2:9) 
+
+
+Kwh_elec_impact_US_DAC_absolute_change = Kwh_elec_impact_US_DAC_absolute_change %>% filter(impact_category %in% impact_keep)
+Kwh_elec_impact_US_DAC_absolute_change$impact_category <- factor(Kwh_elec_impact_US_DAC_absolute_change$impact_category, levels = impact_keep)
+
+CCI_Impact_diff <- Kwh_elec_impact_US_DAC_diff_change_scenario %>% filter(impact_category == 'Climate change (kg CO2-Eq)')
+CCI_time_change <- Kwh_elec_impact_US_DAC_absolute_change %>% filter(impact_category == 'Climate change (kg CO2-Eq)')
+
+
+elec_CCI_absolute_change_figure <- ggplot() + 
+  #geom_point(data = Kwh_elec_impact_US_DAC_per_change, aes(x = year, y = value, group = Climate_scenario, color = Climate_scenario), size = 2.6) + 
+  
+  geom_bar(data = CCI_Impact_diff, aes(x = year, y = kwh_elec_impact_DAC_diff), fill = "tan1", stat="identity") +
+  #geom_line(data = CCI_time_change, aes(x = year, y = value, group = Climate_scenario, color = Climate_scenario), size = 1.3) + 
+  geom_hline(yintercept = 0, color = "black", linetype='dashed',  size = 0.5) +
+  theme(plot.margin = margin(1.3, 2, 0.1, 0.1, "cm"),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.x = element_text(size = 16),
+        axis.text.y = element_text(size = 16),
+        axis.line = element_line(colour = "black", size = 0.5, linetype = "solid"),
+        panel.background = element_blank(),
+        panel.border = element_blank(),
+        strip.text = element_blank(),
+        strip.background = element_blank(),
+        legend.title = element_blank(),
+        legend.text = element_blank(),
+        #legend.direction = "horizontal",
+        legend.position = "none",
+        #legend.spacing.x = unit(0.8, 'cm'),
+        #legend.spacing.y = unit(0.8, 'cm'),
+        #legend.key.size = unit(1, "cm"),
+        panel.spacing.x = unit(0.8, 'cm'),
+        panel.spacing.y = unit(1, 'cm')) +
+  
+  scale_x_discrete(breaks=c(2020, 2040, 2060, 2080, 2100)) +
+  scale_color_manual(name = "Climate scenario", 
+                     values = c(RCP19 = 'red', RCP19_DAC = 'blue')) +
+  scale_y_continuous(limits = c(-0.02, 0.02), breaks = c(seq(-0.02, 0.02, 0.01)), name = "Value")
+  #scale_y_continuous(limits = c(-0.03, 0.6), breaks = c(seq(0, 0.6, 0.2)), name = "Value")
+
+
+plot_grid(elec_CCI_absolute_change_figure, elec_CCI_absolute_change_figure, elec_CCI_absolute_change_figure, elec_CCI_absolute_change_figure, 
+          elec_CCI_absolute_change_figure, elec_CCI_absolute_change_figure, elec_CCI_absolute_change_figure, elec_CCI_absolute_change_figure,
+          ncol=2, align="h")  
+
 ###############################################
 ## End of Figure 3b
 
 
 
 
-## Figure 4 -- LCA result of DACCS (regional results)
+## Figure 5 -- LCA result of DACCS (regional results)
 ###############################################
 
 # Only calculate results for SSP2-RCP1.9 with DACCS scenario (with learning, reference learning rates)
@@ -731,36 +893,44 @@ region_data$impact_category <- factor(region_data$impact_category, levels = Impa
 
 
 ## Figure function
-Impact_tradeoff_figure_function <- function(tech_name, lowerbound, upperbound, length) {
+Impact_tradeoff_figure_function <- function(tech_name, title_name, lowerbound, upperbound, length) {
   
   GL_data_use <- GL_data %>% filter(tech == tech_name)
   region_data_use <- region_data %>% filter(tech == tech_name)
   
   Impact_trade_off_point_plot <- 
     ggplot() + 
-    geom_point(data = GL_data_use, aes(x = year, y = Impact_change, group=1), shape = 0, size = 5) + 
+    geom_point(data = GL_data_use, aes(x = year, y = Impact_change, group=1), shape = 0, size = 4) + 
     geom_line(data = GL_data_use, aes(x = year, y = Impact_change, group=1), size=1, alpha=.3) +
-    geom_point(data = region_data_use, aes(x = year, y = Impact_change, group = region, color = region), shape = 16, size = 5) + 
+    geom_point(data = region_data_use, aes(x = year, y = Impact_change, group = region, color = region), shape = 16, size = 4) + 
     geom_line(data = region_data_use, aes(x = year, y = Impact_change, group = region, color = region), size = 1, alpha=.3) +
     geom_hline(yintercept = 1, linetype="dashed", color = "black") +
+    labs(title = title_name, x = "Year") +
     facet_wrap(~ impact_category, nrow = 1) +
-    theme(axis.title.x = element_blank(),
-          axis.title.y = element_blank(),
-          axis.text.x = element_text(size = 20, angle = 90, hjust = 0.5, vjust = 0.5),
-          axis.text.y = element_text(size = 20),
+    theme(plot.title = element_text(size = font_size),
+          axis.title.x = element_text(size = font_size),
+          axis.title.y = element_text(size = font_size),
+          axis.text.x = element_text(size = font_size, angle = 90, hjust = 0.5, vjust = 0.5),
+          axis.text.y = element_text(size = font_size),
           axis.ticks.x = element_blank(),
           axis.line = element_line(colour = "black", size = 0.5),
+          text = element_text(size = font_size, family = "sans"),
           strip.background = element_blank(),
-          strip.text.x = element_text(size = 20),
+          strip.text.x = element_text(size = font_size),
           legend.position="none",
           legend.text = element_text(colour="black", size=16),
           panel.background = element_blank(),
           panel.border = element_rect(fill = NA, color = "black"),
           panel.spacing.x = unit(0.5,"cm"))  +
-    scale_x_discrete(labels=c("r_2020" = "2020", "r_2060" = "2060", "r_2100" = "2100")) +
-    scale_y_continuous(limits = c(lowerbound, upperbound), breaks = c(seq(0, 2, length)), name = "Value", labels = scales::percent) +
+    scale_x_discrete(labels=c("r_2020" = "2020", "r_2060" = "2060", "r_2100" = "2100"), name = "Year") +
+    scale_y_continuous(limits = c(lowerbound, upperbound), breaks = c(seq(0, 2, length)), 
+                       name = "Change of impact relative to \n 2020 world level (%)", 
+                       labels = scales::percent) +
     scale_color_manual(name = "", 
-                       values = c("CN" = "blue", "US" = "red", "EU" = "gray50", 'RU' = 'orange' ),
+                       values = c("CN" = rgb(0/256, 182/256, 239/256), 
+                                  "US" = rgb(252/256, 118/256, 26/256), 
+                                  "EU" = rgb(115/256, 115/256, 115/256), 
+                                  'RU' = rgb(255/256, 204/256, 0/256)),
                        guide = guide_legend(reverse=TRUE))
   
   Impact_trade_off_point_plot
@@ -769,9 +939,10 @@ Impact_tradeoff_figure_function <- function(tech_name, lowerbound, upperbound, l
 
 
 
+
 ## Only make figures for Solvent-based DACCS with natural gas and Sorbent-based DACCS with heatpump
-Solvent_NG_RCP19_fig <- Impact_tradeoff_figure_function('Solvent_NG', 0, 2, 0.5)
-Sorbent_HP_RCP19_fig <- Impact_tradeoff_figure_function('Sorbent_HP',-0.04, 2, 0.5)
+Solvent_NG_RCP19_fig <- Impact_tradeoff_figure_function('Solvent_NG', "a. Solvent DACCS + Natural Gas (SSP2-RCP1.9 w/ DACCS)", 0, 2, 0.5)
+Sorbent_HP_RCP19_fig <- Impact_tradeoff_figure_function('Sorbent_HP', "b. Sorbent DACCS + Heat Pump (SSP2-RCP1.9 w/ DACCS)", -0.04, 2, 0.5)
 
 plot_grid(Solvent_NG_RCP19_fig, Sorbent_HP_RCP19_fig, ncol=1, align="v")
 
@@ -809,7 +980,7 @@ LCA_con_data_summary$tech_heat <- factor(LCA_con_data_summary$tech_heat, levels 
 
 
 ## Figure function
-Contribution_figure_fun <- function (impact_name, lower_l, upper_l, lower_b, upper_b) {
+Contribution_figure_fun <- function (impact_name, title_name, y_axis_name, lower_l, upper_l, lower_b, upper_b) {
   
   data_input <- LCA_con_data_summary %>% filter(impact_category == impact_name)
   data_input$year <- as.numeric(data_input$year)
@@ -818,10 +989,15 @@ Contribution_figure_fun <- function (impact_name, lower_l, upper_l, lower_b, upp
     "0_CO2_capture" = 'black',    
     "1_Construction" = 'gray50', 
     "4_Op_heat" =  'gray80', 
-    "3_Op_electricity" = "#0070ff", ## blue
-    "2_Op_material" =  '#ffdf00',  ## gold
-    "5_EoL_treat" = '#00cd00'
+    "3_Op_electricity" = rgb(0/256, 182/256, 239/256),  
+    "2_Op_material" =  rgb(255/256, 204/256, 0/256),
+    "5_EoL_treat" = rgb(0/256, 109/256, 44/256)
   )
+  
+  tech_heat_name <- c('Sol_BG' = "Solvent-DAC + Biomethane", 
+                      'Sol_NG' = "Solvent-DAC + Natural Gas", 
+                      'Sor_BG' = "Sorbent-DAC + Biomethane", 
+                      'Sor_HP' = "Sorbent-DAC + Heat pump")
   
   Contribution_figure <-ggplot()+
     geom_bar(data = data_input %>% filter(scenario == 'SSP2_RCP19_DAC'),
@@ -829,17 +1005,20 @@ Contribution_figure_fun <- function (impact_name, lower_l, upper_l, lower_b, upp
     geom_bar(data = data_input %>% filter(scenario == 'SSP2_RCP19_DAC_L'),
              aes(x = year + 3.5, y = value, fill = process), position = "stack", stat = "identity", width = 6) + 
     geom_hline(yintercept = 0, linetype = "dashed", color = "black", size = 0.7) +
-    facet_wrap(~ tech_heat , nrow = 1) + 
+    labs(title = title_name, x = "Year", y = y_axis_name) +
+    facet_wrap(~ tech_heat , nrow = 1, labeller = as_labeller(tech_heat_name)) + 
     
-    theme(plot.margin = margin(0.5,0.5,0.5,0.5, "cm"),
-          axis.title.x = element_blank(),
-          axis.title.y = element_blank(),
-          axis.text.x = element_text(size = 20, angle = 45, vjust = 0.6, hjust=0.7),
-          axis.text.y = element_text(size = 20),
+    theme(plot.margin = margin(0.1,0.5,1,0.5, "cm"),
+          plot.title = element_text(size = font_size),
+          axis.title.x = element_text(size = font_size),
+          axis.title.y = element_text(size = font_size),
+          axis.text.x = element_text(size = font_size),
+          axis.text.y = element_text(size = font_size),
           axis.line = element_line(colour = "black", size = 0.5, linetype = "solid"),
           panel.background = element_blank(),
+          text = element_text(size = font_size, family = "sans"),
           #panel.border = element_blank(),
-          strip.text = element_blank(),
+          strip.text.x = element_text(size = font_size),
           strip.background = element_blank(),
           legend.title = element_blank(),
           legend.text = element_text(size = 20),
@@ -861,14 +1040,16 @@ Contribution_figure_fun
 
 
 ## US
-US_cli_chan_con_figure <- Contribution_figure_fun (impact_name = "Climate change (kg CO2-Eq)", lower_l = -1400, upper_l = 700, lower_b = -1400, upper_b = 700)
-US_fre_eutr_con_figure <- Contribution_figure_fun (impact_name = "Freshwater eutrophication (kg P-Eq)", lower_l = -0.001, upper_l = 0.61, lower_b = 0, upper_b = 0.6)
-US_fre_ecot_con_figure <- Contribution_figure_fun (impact_name = "Freshwater ecotoxicity (kg 14-DCB)", lower_l = -0.001, upper_l = 24, lower_b = 0, upper_b = 24)
-US_ter_acid_con_figure <- Contribution_figure_fun (impact_name = "Terrestrial acidification (kg SO2-Eq)", lower_l = -0.001, upper_l = 2, lower_b = 0, upper_b = 2)
-US_ter_ecot_con_figure <- Contribution_figure_fun (impact_name = "Terrestrial ecotoxicity (kg 14-DCB)", lower_l = -0.001, upper_l = 0.08, lower_b = 0, upper_b = 0.08)
-US_hum_toxi_con_figure <- Contribution_figure_fun (impact_name = "Human toxicity (kg 14-DCB)", lower_l = -0.001, upper_l = 440, lower_b = 0, upper_b = 440)
-US_met_depl_con_figure <- Contribution_figure_fun (impact_name = "Metal depletion (kg Fe-Eq)", lower_l = -0.001, upper_l = 40, lower_b = 0, upper_b = 40)
-US_wat_delp_con_figure <- Contribution_figure_fun (impact_name = "Water depletion (m3 water)", lower_l = -0.001, upper_l = 12, lower_b = 0, upper_b = 12)
+US_cli_chan_con_figure <- Contribution_figure_fun (impact_name = "Climate change (kg CO2-Eq)", title_name = "a. Climate Change Impact", y_axis_name = expression('kg CO'[2]*'-Eq/kWh'), lower_l = -1400, upper_l = 700, lower_b = -1400, upper_b = 700)
+US_hum_toxi_con_figure <- Contribution_figure_fun (impact_name = "Human toxicity (kg 14-DCB)", title_name = "b. Human Toxicity Impact", y_axis_name = 'kg 14-DCB/kWh', lower_l = -0.001, upper_l = 440, lower_b = 0, upper_b = 440)
+US_fre_eutr_con_figure <- Contribution_figure_fun (impact_name = "Freshwater eutrophication (kg P-Eq)", title_name = "c. Freshwater Eutrophication Impact", y_axis_name = 'kg P-Eq/kWh', lower_l = -0.001, upper_l = 0.61, lower_b = 0, upper_b = 0.6)
+US_fre_ecot_con_figure <- Contribution_figure_fun (impact_name = "Freshwater ecotoxicity (kg 14-DCB)", title_name = "d. Freshwater Ecotoxicity Impact", y_axis_name = 'kg 14-DCB/kWh', lower_l = -0.001, upper_l = 24, lower_b = 0, upper_b = 24)
+US_ter_acid_con_figure <- Contribution_figure_fun (impact_name = "Terrestrial acidification (kg SO2-Eq)", title_name = "e. Terrestrial Acidification Impact", y_axis_name= expression('kg SO'[2]*'-Eq/kWh'), lower_l = -0.001, upper_l = 2, lower_b = 0, upper_b = 2)
+US_ter_ecot_con_figure <- Contribution_figure_fun (impact_name = "Terrestrial ecotoxicity (kg 14-DCB)", title_name = "f. Terrestrial Ecotoxicity Impact", y_axis_name = 'kg 14-DCB/kWh', lower_l = -0.001, upper_l = 0.08, lower_b = 0, upper_b = 0.08)
+US_met_depl_con_figure <- Contribution_figure_fun (impact_name = "Metal depletion (kg Fe-Eq)", title_name = "g. Metal Depletion", y_axis_name = 'kg Fe-Eq/kWh', lower_l = -0.001, upper_l = 40, lower_b = 0, upper_b = 40)
+US_wat_delp_con_figure <- Contribution_figure_fun (impact_name = "Water depletion (m3 water)", title_name = "h. Water Depletion", y_axis_name = expression('m'^3*'water/kWh'), lower_l = -0.001, upper_l = 12, lower_b = 0, upper_b = 12)
+
+
 
 
 plot_grid(US_cli_chan_con_figure, US_hum_toxi_con_figure, 
@@ -1014,8 +1195,9 @@ Elec_impact_US_RCP19_noDAC_final$impact_category <- factor(Elec_impact_US_RCP19_
 Elec_impact_US_RCP19_noDAC_final$year <- as.numeric(Elec_impact_US_RCP19_noDAC_final$year)
 
 
+
 ## Figure function
-Elec_impact_figure_fun = function(data_name, category, upperbound, lowerbound, up_limit, low_limit) {
+Elec_impact_figure_fun = function(data_name, category, title_name, y_axis_name, upperbound, lowerbound, up_limit, low_limit) {
   
   #data_name = Elec_impact_US_baseline_final
   #category = 'Climate change (kg CO2-Eq)'
@@ -1027,12 +1209,15 @@ Elec_impact_figure_fun = function(data_name, category, upperbound, lowerbound, u
   Elec_impact_figure <- ggplot() +
     geom_area(data = data_name %>% filter(impact_category == category) %>% filter(tech %in% elec_cate_sort),
               aes(x = year, y = value, fill = tech)) +
-    theme(axis.title.x = element_blank(),
-          axis.title.y = element_blank(),
-          axis.text.x = element_text(size = 16),
-          axis.text.y = element_text(size = 16),
+    labs(title = title_name, x = "Year", y = y_axis_name) +
+    theme(plot.title = element_text(size = font_size), 
+          axis.title.x = element_text(size = font_size), 
+          axis.title.y = element_text(size = font_size), 
+          axis.text.x = element_text(size = font_size), 
+          axis.text.y = element_text(size = font_size), 
           axis.ticks.x = element_blank(),
           axis.line = element_line(colour = "black", size = 0.5),
+          text = element_text(size = font_size, family = "sans"),
           strip.text = element_text(size = 16),
           strip.background = element_blank(),
           legend.text = element_text(size = 18, face = "bold"),
@@ -1040,12 +1225,11 @@ Elec_impact_figure_fun = function(data_name, category, upperbound, lowerbound, u
           legend.position="none",
           legend.spacing.x = unit(0.3, 'cm'),
           legend.spacing.y = unit(0.3, 'cm'),
-          plot.margin = margin(0.9,0.5,0.1,0.6, "cm"),
-          plot.title = element_blank(),
+          plot.margin = margin(0.1,0.1,0.1,0.1, "cm"),
           panel.border = element_blank(),
           panel.background = element_blank(),
           panel.spacing.x = unit(1, 'cm')) +
-    scale_y_continuous(limits = c(lowerbound, upperbound), breaks = c(seq(low_limit, up_limit, (up_limit - low_limit)/4)), name = "Value") +
+    scale_y_continuous(limits = c(lowerbound, upperbound), breaks = c(seq(low_limit, up_limit, (up_limit - low_limit)/4))) +
     scale_fill_manual(values = eco_color_scheme)
   
   Elec_impact_figure
@@ -1055,35 +1239,36 @@ Elec_impact_figure_fun = function(data_name, category, upperbound, lowerbound, u
 
 ## Making figure
 # SSP2-Baseline  
-CLI_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline_final, 'Climate change (kg CO2-Eq)', 0.5, -0.1, 0.5, 0)
-TAD_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline_final, 'Terrestrial acidification (kg SO2-Eq)', 0.0012, 0, 0.0012, 0)
-FET_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline_final, 'Freshwater ecotoxicity (kg 14-DCB)', 0.016, 0, 0.016, 0)
-TET_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline_final, 'Terrestrial ecotoxicity (kg 14-DCB)', 0.00008, -0.000001, 0.00008, 0)
-HTO_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline_final, 'Human toxicity (kg 14-DCB)', 0.32, -0.02, 0.32, 0)
-FEU_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline_final, 'Freshwater eutrophication (kg P-Eq)', 0.00048, 0, 0.00048, 0)
-MDP_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline_final, 'Metal depletion (kg Fe-Eq)', 0.020, 0, 0.020, 0)
-WDP_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline_final, 'Water depletion (m3 water)', 0.0024, 0, 0.0024, 0)
+CLI_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline_final, 'Climate change (kg CO2-Eq)', title_name = "a. Climate Change Impact (SSP2-Baseline)", y_axis_name = expression('kg CO'[2]*'-Eq/kWh'), 0.5, -0.1, 0.5, 0)
+HTO_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline_final, 'Human toxicity (kg 14-DCB)', title_name = "d. Human Toxicity Impact (SSP2-Baseline)", y_axis_name = 'kg 14-DCB/kWh', 0.32, -0.02, 0.32, 0)
+FEU_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline_final, 'Freshwater eutrophication (kg P-Eq)', title_name = "g. Freshwater Eutrophication Impact (SSP2-Baseline)", y_axis_name = 'kg P-Eq/kWh', 0.00048, 0, 0.00048, 0)
+FET_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline_final, 'Freshwater ecotoxicity (kg 14-DCB)', title_name = "j. Freshwater Ecotoxicity Impact (SSP2-Baseline)", y_axis_name = 'kg 14-DCB/kWh', 0.016, 0, 0.016, 0)
+TAD_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline_final, 'Terrestrial acidification (kg SO2-Eq)', title_name = "m. Terrestrial Acidification Impact (SSP2-Baseline)", y_axis_name= expression('kg SO'[2]*'-Eq/kWh'), 0.0012, 0, 0.0012, 0)
+TET_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline_final, 'Terrestrial ecotoxicity (kg 14-DCB)', title_name = "p. Terrestrial Ecotoxicity Impact (SSP2-Baseline)", y_axis_name = 'kg 14-DCB/kWh', 0.00008, -0.000001, 0.00008, 0)
+MDP_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline_final, 'Metal depletion (kg Fe-Eq)', title_name = "s. Metal Depletion (SSP2-Baseline)", y_axis_name = 'kg Fe-Eq/kWh', 0.020, 0, 0.020, 0)
+WDP_elec_impact_baseline <- Elec_impact_figure_fun(Elec_impact_US_baseline_final, 'Water depletion (m3 water)', title_name = "v. Water Depletion (SSP2-Baseline)", y_axis_name = expression('m'^3*'water/kWh'), 0.0024, 0, 0.0024, 0)
+
 
 
 # SSP2-RCP19 w/o DACCS  
-CLI_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC_final, 'Climate change (kg CO2-Eq)', 0.5, -0.1, 0.5, 0)
-TAD_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC_final, 'Terrestrial acidification (kg SO2-Eq)', 0.0012, 0, 0.0012, 0)
-FET_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC_final, 'Freshwater ecotoxicity (kg 14-DCB)', 0.016, 0, 0.016, 0)
-TET_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC_final, 'Terrestrial ecotoxicity (kg 14-DCB)', 0.00008, 0, 0.00008, 0)
-HTO_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC_final, 'Human toxicity (kg 14-DCB)', 0.32, -0.02, 0.32, 0)
-FEU_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC_final, 'Freshwater eutrophication (kg P-Eq)', 0.00048, 0, 0.00048, 0)
-MDP_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC_final, 'Metal depletion (kg Fe-Eq)', 0.020, 0, 0.020, 0)
-WDP_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC_final, 'Water depletion (m3 water)', 0.0024, 0, 0.0024, 0)
+CLI_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC_final, 'Climate change (kg CO2-Eq)', title_name = "b. Climate Change Impact (SSP2-RCP1.9 w/o DACCS)", y_axis_name = expression('kg CO'[2]*'-Eq/kWh'), 0.5, -0.1, 0.5, 0)
+HTO_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC_final, 'Human toxicity (kg 14-DCB)', title_name = "e. Human Toxicity Impact (SSP2-RCP1.9 w/o DACCS)", y_axis_name = 'kg 14-DCB/kWh', 0.32, -0.02, 0.32, 0)
+FEU_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC_final, 'Freshwater eutrophication (kg P-Eq)', title_name = "h. Freshwater Eutrophication Impact (SSP2-RCP1.9 w/o DACCS)", y_axis_name = 'kg P-Eq/kWh', 0.00048, 0, 0.00048, 0)
+FET_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC_final, 'Freshwater ecotoxicity (kg 14-DCB)', title_name = "k. Freshwater Ecotoxicity Impact (SSP2-RCP1.9 w/o DACCS)", y_axis_name = 'kg 14-DCB/kWh', 0.016, 0, 0.016, 0)
+TAD_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC_final, 'Terrestrial acidification (kg SO2-Eq)', title_name = "n. Terrestrial Acidification Impact (SSP2-RCP1.9 w/o DACCS)", y_axis_name= expression('kg SO'[2]*'-Eq/kWh'), 0.0012, 0, 0.0012, 0)
+TET_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC_final, 'Terrestrial ecotoxicity (kg 14-DCB)', title_name = "q. Terrestrial Ecotoxicity Impact (SSP2-RCP1.9 w/o DACCS)", y_axis_name = 'kg 14-DCB/kWh', 0.00008, 0, 0.00008, 0)
+MDP_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC_final, 'Metal depletion (kg Fe-Eq)', title_name = "t. Metal Depletion (SSP2-RCP1.9 w/o DACCS)", y_axis_name = 'kg Fe-Eq/kWh', 0.020, 0, 0.020, 0)
+WDP_elec_impact_RCP19_noDAC <- Elec_impact_figure_fun(Elec_impact_US_RCP19_noDAC_final, 'Water depletion (m3 water)', title_name = "w. Water Depletion (SSP2-RCP1.9 w/o DACCS)", y_axis_name = expression('m'^3*'water/kWh'), 0.0024, 0, 0.0024, 0)
 
 # SSP2-RCP19 w/ DACCS  
-CLI_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19_final, 'Climate change (kg CO2-Eq)', 0.5, -0.1, 0.5, -0.1)
-TAD_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19_final, 'Terrestrial acidification (kg SO2-Eq)', 0.0012, 0, 0.0012, 0)
-FET_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19_final, 'Freshwater ecotoxicity (kg 14-DCB)', 0.016, 0, 0.016, 0)
-TET_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19_final, 'Terrestrial ecotoxicity (kg 14-DCB)', 0.00008, 0, 0.00008, 0)
-HTO_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19_final, 'Human toxicity (kg 14-DCB)', 0.32, -0.02, 0.32, 0)
-FEU_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19_final, 'Freshwater eutrophication (kg P-Eq)', 0.00048, 0 , 0.00048, 0)
-MDP_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19_final, 'Metal depletion (kg Fe-Eq)', 0.020, 0, 0.020, 0)
-WDP_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19_final, 'Water depletion (m3 water)', 0.0024, 0, 0.0024, 0)
+CLI_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19_final, 'Climate change (kg CO2-Eq)', title_name = "c. Climate Change Impact (SSP2-RCP1.9 w/ DACCS)", y_axis_name = expression('kg CO'[2]*'-Eq/kWh'), 0.5, -0.1, 0.5, -0.1)
+HTO_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19_final, 'Human toxicity (kg 14-DCB)', title_name = "f. Human Toxicity Impact (SSP2-RCP1.9 w/ DACCS)", y_axis_name = 'kg 14-DCB/kWh', 0.32, -0.02, 0.32, 0)
+FEU_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19_final, 'Freshwater eutrophication (kg P-Eq)', title_name = "i. Freshwater Eutrophication Impact (SSP2-RCP1.9 w/ DACCS)", y_axis_name = 'kg P-Eq/kWh', 0.00048, 0 , 0.00048, 0)
+FET_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19_final, 'Freshwater ecotoxicity (kg 14-DCB)', title_name = "l. Freshwater Ecotoxicity Impact (SSP2-RCP1.9 w/ DACCS)", y_axis_name = 'kg 14-DCB/kWh', 0.016, 0, 0.016, 0)
+TAD_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19_final, 'Terrestrial acidification (kg SO2-Eq)', title_name = "o. Terrestrial Acidification Impact (SSP2-RCP1.9 w/ DACCS)", y_axis_name= expression('kg SO'[2]*'-Eq/kWh'), 0.0012, 0, 0.0012, 0)
+TET_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19_final, 'Terrestrial ecotoxicity (kg 14-DCB)', title_name = "r. Terrestrial Ecotoxicity Impact (SSP2-RCP1.9 w/ DACCS)", y_axis_name = 'kg 14-DCB/kWh', 0.00008, 0, 0.00008, 0)
+MDP_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19_final, 'Metal depletion (kg Fe-Eq)', title_name = "u. Metal Depletion (SSP2-RCP1.9 w/ DACCS)", y_axis_name = 'kg Fe-Eq/kWh', 0.020, 0, 0.020, 0)
+WDP_elec_impact_RCP19 <- Elec_impact_figure_fun(Elec_impact_US_RCP19_final, 'Water depletion (m3 water)', title_name = "x. Water Depletion (SSP2-RCP1.9 w/ DACCS)", y_axis_name = expression('m'^3*'water/kWh'), 0.0024, 0, 0.0024, 0)
 
 
 
@@ -1097,10 +1282,10 @@ plot_grid(FET_elec_impact_baseline, FET_elec_impact_RCP19_noDAC, FET_elec_impact
           TET_elec_impact_baseline, TET_elec_impact_RCP19_noDAC, TET_elec_impact_RCP19,
           nrow = 3, align="v")
 
-plot_grid(TET_elec_impact_baseline, TET_elec_impact_RCP19_noDAC, TET_elec_impact_RCP19,
+plot_grid(
           MDP_elec_impact_baseline, MDP_elec_impact_RCP19_noDAC, MDP_elec_impact_RCP19,  
           WDP_elec_impact_baseline, WDP_elec_impact_RCP19_noDAC, WDP_elec_impact_RCP19,
-          nrow = 3, align="v")
+          nrow = 2, align="v")
 
 
 legend <- ggplot() +
